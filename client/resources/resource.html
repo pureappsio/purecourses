@@ -1,0 +1,13 @@
+<template name="resource">
+
+<div class='row'>
+
+  <div class='col-md-2'>{{type}}</div>
+  <div class='col-md-6'><a href="{{url}}">{{name}}</a></div>
+  {{#if isAdmin}}
+  <div class='col-md-1'><button class='btn btn-danger btn-block delete-resource'>X</button></div>
+  {{/if}}
+
+</div>
+
+</template>

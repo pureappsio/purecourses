@@ -1,0 +1,14 @@
+<template name="lesson">
+
+<div class='row'>
+
+<div class='col-md-1'>{{order}}</div>
+<div class='col-md-9'><a href='/lessons/{{_id}}'>{{name}}</a></div>
+
+{{#if isAdmin}}
+<div class='col-md-2'><button class='btn btn-warning btn-block delete'>Delete</button></div>
+{{/if}}
+
+</div>
+
+</template>

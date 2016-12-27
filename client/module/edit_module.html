@@ -1,0 +1,36 @@
+<template name="editModule">
+
+<h3>Editing Module: {{name}}</h3>
+
+<div class='row'>
+
+  <div class='col-md-1'>
+    <input id='module-order' type='text' class='form-control' value={{order}}>
+  </div>
+  <div class='col-md-2'>
+    <input id='module-name' type='text' class='form-control' value={{name}}>
+  </div>
+
+  <div class='col-md-2'>Restrict to: </div>
+  <div class='col-md-3'>
+    <select id='products' multiple>
+    
+    </select>
+  </div>
+  <div class='col-md-2'>
+    <button id='edit-module' class='btn btn-block btn-primary'>Edit Module</button>
+  </div>
+  <div class='col-md-2'>
+    <a href='/courses/{{courseId}}' class='btn btn-block btn-warning'>Come Back</a>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class='col-md-3'>Restricted to:</div>
+  <div class='col-md-3'>{{products}}</div>
+
+</div>
+
+</template>

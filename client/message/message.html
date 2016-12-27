@@ -1,0 +1,23 @@
+<template name="message">
+    <h3>Send Message</h3>
+    <div class='row'>
+        <div class='col-md-4'>
+            <select id='course-id' class="form-control">
+                {{#each courses}} {{> courseSelect}} {{/each}}
+            </select>
+        </div>
+        <div class='col-md-4'>
+            <input type='text' id='email-subject' class="form-control" placeholder="Email subject ...">
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-8'>
+            <div id="email-text"></div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-8'>
+            <button id='send-email' class='btn btn-lg btn-primary btn-block'>Send Email</button>
+        </div>
+    </div>
+</template>

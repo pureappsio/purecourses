@@ -1,0 +1,65 @@
+<template name="moduleDetails">
+
+<h3>{{name}}</h3>
+
+{{#if isAdmin}}
+<div class='row'>
+
+  <div class='col-md-1'>
+  	<input id='lesson-order' type='text' class='form-control'>
+  </div>
+  <div class='col-md-3'>
+  	<input id='lesson-name' type='text' class='form-control' placeholder="Name ...">
+  </div>
+  <div class='col-md-3'>
+  	<input id='lesson-url' type='text' class='form-control' placeholder="URL ...">
+  </div>
+  <div class='col-md-3'><button id='add-lesson' class='btn btn-block btn-primary'>Add new lesson</button></div>
+
+</div>
+{{/if}}
+
+{{#each lessons}}
+	{{> lesson}}
+{{/each}}
+
+{{#if isAdmin}}
+<h3>Add Resource</h3>
+<div class='row'>
+
+  <div class='col-md-3'>
+    <input id='resource-name' type='text' class='form-control' placeholder="Name ...">
+  </div>
+  <div class='col-md-3'>
+    <input id='resource-url' type='text' class='form-control' placeholder="URL ...">
+  </div>
+  <div class='col-md-3'>
+    <select id='resource-type' class='form-control'>
+      <option value='Document'>Document</option>
+      <option value='Link'>Link</option>
+    </select>
+  </div>
+  <div class='col-md-3'><button id='add-resource' class='btn btn-block btn-primary'>Add resource</button></div>
+
+</div>
+{{/if}}
+
+{{#if areResources}}
+<h3>Resources</h3>
+{{/if}}
+
+{{#each resources}}
+  {{> resource}}
+{{/each}}
+
+<div class="row voffset30">
+
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<a href='/courses/{{courseId}}' class="btn btn-block btn-primary">Come Back</a>
+	</div>
+	<div class="col-md-3"></div>
+
+</div>
+
+</template>

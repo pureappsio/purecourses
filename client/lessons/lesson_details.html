@@ -1,0 +1,35 @@
+<template name="lessonDetails">
+
+
+
+<div class="row">
+
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<h3>{{name}}</h3>
+	</div>
+	<div class="col-md-3"></div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<video preload="auto" controls src="{{url}}"></video>
+	</div>
+	<div class="col-md-3"></div>
+
+</div>
+
+<div class="row voffset30">
+
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<a href='/modules/{{moduleId}}' class="btn btn-block btn-primary">Come Back</a>
+	</div>
+	<div class="col-md-3"></div>
+
+</div>
+	
+</template>

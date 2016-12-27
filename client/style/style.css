@@ -1,0 +1,96 @@
+/* CSS declarations go here */
+
+.row {
+    margin-top: 5px;
+    vertical-align: middle;
+}
+
+.col-centered {
+    text-align: center;
+}
+
+.site-title {
+    color: black;
+    font-size: 20px;
+}
+
+.column-sort {
+    cursor: pointer;
+}
+
+.icon-small {
+    font-size: 14px;
+}
+
+.column-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.column-bold {
+    font-weight: bold;
+}
+
+.bg-green {
+    background-color: #80CC99;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.voffset30 {
+    margin-top: 30px;
+}
+
+.voffset50 {
+    margin-top: 50px;
+}
+
+.voffset15 {
+    margin-top: 15px;
+}
+
+body {
+    font-size: 22px;
+}
+
+.item-remove {
+    color: red;
+}
+
+.filter-label {
+    font-size: 14px;
+}
+
+.item-remove:hover {
+    cursor: pointer;
+}
+
+.investment-minus:hover {
+    color: gray;
+    cursor: pointer;
+}
+
+.investment-plus:hover {
+    color: gray;
+    cursor: pointer;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
+
+.possible-course-picture {
+    filter: grayscale(100%) opacity(50%);
+}
+
+/*.possible-course-picture-container {
+	background-color: gray;
+}*/
