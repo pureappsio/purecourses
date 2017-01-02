@@ -1,7 +1,7 @@
 Meteor.startup(function() {
 
     // Process url
-    process.env.MAIL_URL = "smtp://marcoschwartz:Beyond2008!@smtp.sendgrid.net:587";
+    process.env.MAIL_URL = "";
 
     // Allow delete users
     Meteor.users.allow({
