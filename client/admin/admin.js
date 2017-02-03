@@ -15,24 +15,31 @@ Template.admin.rendered = function() {
         }
     });
 
-    // Fill picker
-    Meteor.call('getProducts', function(err, products) {
+    // // Fill picker
+    // Meteor.call('getProducts', function(err, products) {
 
-        for (i = 0; i < products.length; i++) {
-            $('#products').append($('<option>', {
-                value: products[i]._id,
-                text: products[i].name
-            }));
-        }
+    //     for (i = 0; i < products.length; i++) {
+    //         $('#products').append($('<option>', {
+    //             value: products[i]._id,
+    //             text: products[i].name
+    //         }));
+    //     }
 
-        for (i = 0; i < products.length; i++) {
-            $('#all-products').append($('<option>', {
-                value: products[i]._id,
-                text: products[i].name
-            }));
-        }
+    //     for (i = 0; i < products.length; i++) {
+    //         $('#accounts-products').append($('<option>', {
+    //             value: products[i]._id,
+    //             text: products[i].name
+    //         }));
+    //     }
 
-    });
+    //     for (i = 0; i < products.length; i++) {
+    //         $('#all-products').append($('<option>', {
+    //             value: products[i]._id,
+    //             text: products[i].name
+    //         }));
+    //     }
+
+    // });
 
 }
 
@@ -56,6 +63,12 @@ Template.admin.events({
 
     },
 
+    'click #set-theme': function() {
+
+        Meteor.call('insertMeta', { value: $('#theme :selected').val(), type: 'theme' })
+
+    },
+
     // 'click #reset-edd': function() {
 
     //   // Reset
@@ -68,42 +81,40 @@ Template.admin.events({
         Meteor.call('setTitle', $('#new-title').val());
 
     },
+    'click #set-icon': function() {
+
+        // Reset
+        Meteor.call('insertMeta', { value: $('#new-icon').val(), type: 'icon' });
+
+    },
     'click #set-user-data': function() {
 
         // Reset
         Meteor.call('setUserData', $('#user-name').val(), $('#user-email').val());
 
     },
-    // 'click #refresh-edd': function() {
-
-    //  // Get data
-    //  eddData = {
-    //    url: $('#edd-url').val(),
-    //    token: $('#edd-token').val(),
-    //    key: $('#edd-key').val()
-    //  }
-
-    //  // Refresh
-    //  Meteor.call('refreshProducts', eddData);
-
-    // },
-    'click #assign-product': function() {
+    'click #assign-course': function() {
 
         // Refresh
-        Meteor.call('assignProduct', $('#users :selected').val(), [$('#products').val()]);
+        Meteor.call('assignCourse', $('#users :selected').val(), $('#courses :selected').val());
 
     },
-    'click #assign-product-all': function() {
+    // 'click #assign-product-all': function() {
 
-        // Assign
-        Meteor.call('assignProductAll', $('#all-products').val());
+    //     // Assign
+    //     Meteor.call('assignProductAll', $('#all-products').val());
 
-    },
+    // },
     'click #set-language': function() {
 
         // Refresh
         Meteor.call('setLanguage', $('#language').val());
 
+    },
+    'click #create-accounts': function() {
+
+        // Refresh
+        Meteor.call('createAccounts', $('#password').val());
     }
 
 });
@@ -123,5 +134,8 @@ Template.admin.helpers({
     },
     userName: function() {
         return Meteor.user().userName;
+    },
+    courses: function() {
+        return Courses.find({});
     }
 });

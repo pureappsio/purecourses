@@ -3,7 +3,7 @@ Template.user.helpers({
     return this.emails[0].address;
   },
   nbProducts: function() {
-    return this.products.length;
+    return this.courses.length;
   }
 
 });

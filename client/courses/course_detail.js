@@ -1,96 +1,111 @@
 Template.courseDetails.events({
 
-  'click #add-module': function() {
+    'click #add-lesson': function() {
 
-  	// Module
-  	module = {
-  	  name: $('#module-name').val(),
-  	  order: parseFloat($('#module-order').val()),
-  	  courseId: this._id
-  	}
+        // Module
+        lesson = {
+            name: $('#lesson-name').val(),
+            url: $('#lesson-url').val(),
+            order: parseFloat($('#lesson-order').val()),
+            courseId: this._id
+        };
 
-    if ($('#products').val() != null) {
-      module.products = $('#products').val();
+        // Add
+        Meteor.call('addLesson', lesson);
+    },
+
+    'click #add-module': function() {
+
+        // Module
+        module = {
+            name: $('#module-name').val(),
+            order: parseFloat($('#module-order').val()),
+            courseId: this._id
+        }
+
+        if ($('#products').val() != null) {
+            module.products = $('#products').val();
+        }
+
+        // Add
+        Meteor.call('addModule', module);
+    },
+    'click #add-resource': function() {
+
+        // Module
+        resource = {
+            name: $('#resource-name').val(),
+            url: $('#resource-url').val(),
+            type: $('#resource-type :selected').val(),
+            courseId: this._id
+        };
+
+        // Add
+        Meteor.call('addResource', resource);
     }
-
-  	// Add
-  	Meteor.call('addModule', module);
-  },
-  'click #add-resource': function() {
-
-    // Module
-    resource = {
-      name: $('#resource-name').val(),
-      url: $('#resource-url').val(),
-      type: $('#resource-type :selected').val(),
-      courseId: this._id
-    };
-
-    // Add
-    Meteor.call('addResource', resource);
-  }
 
 });
 
 Template.courseDetails.helpers({
 
-  modules: function() {
-  	return Session.get('allowedModules');
-  },
-  resources: function() {
-    return Resources.find({courseId: this._id, moduleId: {$exists: false}});
-  },
-  areResources: function() {
-    if (Resources.find({courseId: this._id, moduleId: {$exists: false}}).fetch().length == 0) {
-      return false;
+    modules: function() {
+        return Session.get('allowedModules');
+    },
+    lessons: function() {
+        return Lessons.find({ courseId: this._id });
+    },
+    resources: function() {
+        return Resources.find({ courseId: this._id, moduleId: { $exists: false } });
+    },
+    areResources: function() {
+        if (Resources.find({ courseId: this._id, moduleId: { $exists: false } }).fetch().length == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
-    else {
-      return true;
-    }
-  }
 
 });
 
 Template.courseDetails.rendered = function() {
 
-  // Get course ID
-  var courseId = this.data._id;
+    // Get course ID
+    var courseId = this.data._id;
 
-  Tracker.autorun(function () {
+    Tracker.autorun(function() {
 
-    // Init picker
-    $('#products').selectpicker();
+        // Init picker
+        $('#products').selectpicker();
 
-    // Fill picker
-    Meteor.call('getProducts', function(err, products) {
+        // Fill picker
+        Meteor.call('getProducts', function(err, products) {
 
-      for (i = 0; i < products.length; i++) {
-        $('#products').append($('<option>', {
-          value: products[i]._id,
-          text: products[i].name
-        }));
-      }
+            for (i = 0; i < products.length; i++) {
+                $('#products').append($('<option>', {
+                    value: products[i]._id,
+                    text: products[i].name
+                }));
+            }
 
-      // Refresh picker
-      $('#products').selectpicker('refresh');
+            // Refresh picker
+            $('#products').selectpicker('refresh');
+
+        });
+
+        var user = Meteor.user();
+        var modules = Modules.find({ courseId: courseId }, { sort: { order: 1 } }).fetch();
+
+        // Get right modules
+        if (user.emails[0].address == 'marcolivier.schwartz@gmail.com') {
+            Session.set('allowedModules', modules);
+        } else {
+
+            Meteor.call('getAllowedModules', user._id, courseId, function(err, modules) {
+                Session.set('allowedModules', modules);
+            });
+
+        }
 
     });
-
-    var user = Meteor.user();
-    var modules = Modules.find({courseId: courseId}, {sort: {order: 1}}).fetch();
-
-    // Get right modules
-    if (user.emails[0].address == 'marcolivier.schwartz@gmail.com') {
-      Session.set('allowedModules', modules);
-    }
-    else {
-
-      Meteor.call('getAllowedModules', user._id, courseId, function(err, modules) {
-        Session.set('allowedModules', modules);
-      }); 
-
-    }
-
-  });
 
 }

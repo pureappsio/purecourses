@@ -8,4 +8,5 @@ Tracker.autorun(function() {
     Meteor.subscribe('userProducts');
     Meteor.subscribe('allUsers');
     Meteor.subscribe('userIntegrations');
+    Meteor.subscribe('userMetas');
 });

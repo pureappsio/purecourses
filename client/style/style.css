@@ -94,3 +94,9 @@ video {
 /*.possible-course-picture-container {
 	background-color: gray;
 }*/
+
+#sent-notification {
+    margin-top: 15px;
+    text-align: center;
+    display: none
+}

@@ -6,12 +6,12 @@ Template.home.helpers({
   possibleCourses: function() {
     return Session.get('possibleCourses');
   },
-  products: function() {
-  	return Products.find({});
-  },
-  title: function() {
-    return Session.get('coursesTitle');
-  }
+  // products: function() {
+  // 	return Products.find({});
+  // },
+  // title: function() {
+  //   return Session.get('coursesTitle');
+  // }
 
 });
 
@@ -31,29 +31,29 @@ Template.home.rendered = function() {
 
     });
 
-    // Init picker
-    $('#products').selectpicker();
+    // // Init picker
+    // $('#products').selectpicker();
 
-    // Fill picker
-    Meteor.call('getProducts', function(err, products) {
+    // // Fill picker
+    // Meteor.call('getProducts', function(err, products) {
 
-      for (i = 0; i < products.length; i++) {
-        $('#products').append($('<option>', {
-          value: products[i]._id,
-          text: products[i].name
-        }));
-      }
+    //   for (i = 0; i < products.length; i++) {
+    //     $('#products').append($('<option>', {
+    //       value: products[i]._id,
+    //       text: products[i].name
+    //     }));
+    //   }
 
-        // Free option
-        $('#products').append($('<option>', {
-            value: 'free',
-            text: 'Free content'
-        }));
+    //     // Free option
+    //     $('#products').append($('<option>', {
+    //         value: 'free',
+    //         text: 'Free content'
+    //     }));
 
-      // Refresh picker
-      $('#products').selectpicker('refresh');
+    //   // Refresh picker
+    //   $('#products').selectpicker('refresh');
 
-    });
+    // });
 
     var user = Meteor.user();
     var courses = Courses.find({}).fetch();
@@ -86,7 +86,7 @@ Template.home.events({
   	course = {
   	  imgUrl: $('#course-img-url').val(),
   	  name: $('#course-name').val(),
-  	  products: $('#products').val()
+  	  access: $('#access :selected').val()
   	}
   	console.log(course);
 

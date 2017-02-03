@@ -1,42 +1,26 @@
 <template name="home">
-
-<h3>{{title}}</h3>
-
-<div class='voffset50'></div>
-
-{{#if isAdmin}}
-
-<div class='row'>
-
-  <div class='col-md-3'>
-  	<input id='course-name' type='text' class='form-control' placeholder="Name ...">
-  </div>
-  <div class='col-md-3'>
-  	<input id='course-img-url' type='text' class='form-control' placeholder="Img url ...">
-  </div>
-  <div class='col-md-3'>
-  	<select id='products' multiple>
-  	
-  	</select>
-  </div>
-  <div class='col-md-3'>
-  	<button id='add-course' class='btn btn-block btn-primary'>Add new course</button>
-  </div>
-
-</div>
-
-{{/if}}
-
-<div class='row'>
-
-{{#each courses}}
-  {{> course}}
-{{/each}}
-
-{{#each possibleCourses}}
-  {{> possibleCourse}}
-{{/each}}
-
-</div>
-
+    <h3>{{#if isTheme 'simple'}}Videos{{else}}Courses{{/if}}</h3>
+    <div class='voffset50'></div>
+    {{#if isAdmin}}
+    <div class='row'>
+        <div class='col-md-3'>
+            <input id='course-name' type='text' class='form-control' placeholder="Name ...">
+        </div>
+        <div class='col-md-3'>
+            <input id='course-img-url' type='text' class='form-control' placeholder="Img url ...">
+        </div>
+        <div class='col-md-3'>
+            <select class='form-control' id='access'>
+                <option value='paid'>Paid Content</option>
+                <option value='free'>Free Content</option>
+            </select>
+        </div>
+        <div class='col-md-3'>
+            <button id='add-course' class='btn btn-block btn-primary'>Add new course</button>
+        </div>
+    </div>
+    {{/if}}
+    <div class='row'>
+        {{#each courses}} {{> course}} {{/each}} {{#each possibleCourses}} {{> possibleCourse}} {{/each}}
+    </div>
 </template>

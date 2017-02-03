@@ -27,6 +27,10 @@ Meteor.publish("userIntegrations", function () {
 	return Integrations.find({});
 });
 
+Meteor.publish("userMetas", function () {
+	return Metas.find({});
+});
+
 Meteor.publish("allUsers", function () {
 	return Meteor.users.find({}, {products: 1});
 });

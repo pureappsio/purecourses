@@ -1,10 +1,26 @@
 Template.possibleCourse.helpers({
 
-  unlockLink: function() {
+    unlockLink: function() {
 
-  	var integration = Integrations.findOne({type: 'purecart'});
+        return Session.get('unlockLink_' + this._id);
 
-  	return 'https://' + integration.url + '?product_id=' + this.products[this.products.length - 1];
-  }
+    }
+
+});
+
+Template.possibleCourse.onRendered(function() {
+
+    if (this.data) {
+
+    	courseId = this.data._id;
+
+        if (this.data.salesPage) {
+            Session.set('unlockLink_' + courseId, this.data.salesPage);
+        } else {
+            Meteor.call('getProductLink', courseId, function(err, data) {
+            	Session.set('unlockLink_' + courseId, data);
+            });
+        }
+    }
 
 });

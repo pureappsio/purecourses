@@ -1,29 +1,31 @@
 Template.editCourse.rendered = function() {
 
-    // Init picker
-    $('#products').selectpicker();
+    // // Init picker
+    // $('#products').selectpicker();
 
-    // Fill picker
-    Meteor.call('getProducts', function(err, products) {
+    // // Fill picker
+    // Meteor.call('getProducts', function(err, products) {
 
-        // All products
-        for (i = 0; i < products.length; i++) {
-            $('#products').append($('<option>', {
-                value: products[i]._id,
-                text: products[i].name
-            }));
-        }
+    //     // All products
+    //     for (i = 0; i < products.length; i++) {
+    //         $('#products').append($('<option>', {
+    //             value: products[i]._id,
+    //             text: products[i].name
+    //         }));
+    //     }
 
-        // Free option
-        $('#products').append($('<option>', {
-            value: 'free',
-            text: 'Free content'
-        }));
+    //     // Free option
+    //     $('#products').append($('<option>', {
+    //         value: 'free',
+    //         text: 'Free content'
+    //     }));
 
-        // Refresh picker
-        $('#products').selectpicker('refresh');
+    //     // Refresh picker
+    //     $('#products').selectpicker('refresh');
 
-    });
+    // });
+
+    $('#access').val(this.data.access);
 
 };
 
@@ -35,8 +37,9 @@ Template.editCourse.events({
         course = {
             imgUrl: $('#course-img-url').val(),
             name: $('#course-name').val(),
-            products: $('#products').val(),
-            _id: this._id
+            access: $('#access :selected').val(),
+            _id: this._id,
+            salesPage: $('#course-sales-page').val()
         }
 
         // Add

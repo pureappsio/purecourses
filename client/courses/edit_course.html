@@ -1,35 +1,35 @@
 <template name="editCourse">
-
-  <h3>Editing Course: {{name}}</h3>
-
-  <div class='row'>
-
-  <div class='col-md-2'>
-  	<input id='course-name' type='text' class='form-control' value={{name}}>
-  </div>
-  <div class='col-md-2'>
-  	<input id='course-img-url' type='text' class='form-control' value={{imgUrl}}>
-  </div>
-  <div class='col-md-3'>
-  	<select id='products' multiple>
-  	</select>
-  </div>
-  <div class='col-md-2'>
-  	<button id='edit-course' class='btn btn-block btn-primary'>Edit Course</button>
-  </div>
-
-  <div class='col-md-2'>
-    <a href='/' class='btn btn-block btn-warning'>Come Back</a>
-  </div>
-
-</div>
-
-<div class='row'>
-
-  <div class='col-md-3'>
-    {{products}}
-  </div>
-
-</div>
-
+    <h3>Editing Course: {{name}}</h3>
+    <div class='row'>
+        <div class='col-md-2'>
+            <input id='course-name' type='text' class='form-control' value={{name}}>
+        </div>
+        <div class='col-md-2'>
+            <input id='course-img-url' type='text' class='form-control' value={{imgUrl}}>
+        </div>
+        <div class='col-md-2'>
+            <input id='course-sales-page' type='text' class='form-control' value={{salesPage}}>
+        </div>
+        <!--  <div class='col-md-3'>
+    <select id='products' multiple>
+    </select>
+  </div> -->
+        <div class='col-md-3'>
+            <select class='form-control' id='access'>
+                <option value='paid'>Paid Content</option>
+                <option value='free'>Free Content</option>
+            </select>
+        </div>
+        <div class='col-md-2'>
+            <button id='edit-course' class='btn btn-block btn-primary'>Edit Course</button>
+        </div>
+        <div class='col-md-2'>
+            <a href='/' class='btn btn-block btn-warning'>Come Back</a>
+        </div>
+    </div>
+   <!--  <div class='row'>
+        <div class='col-md-3'>
+            {{products}}
+        </div>
+    </div> -->
 </template>
