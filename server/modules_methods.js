@@ -10,29 +10,24 @@ Meteor.methods({
 
         var allowedModules = [];
 
-        for (i = 0; i < modules.length; i++) {
+        if (user.modules) {
 
-            if (modules[i].products) {
+            if (user.modules[courseId]) {
+                var paidModules = user.modules[courseId];
+                console.log(paidModules);
 
-                if (user.products) {
-
-                    for (j = 0; j < user.products.length; j++) {
-
-                        for (k = 0; k < modules[i].products.length; k++) {
-
-                            if (modules[i].products[k] == user.products[j]) {
-                                allowedModules.push(modules[i]);
-                            }
-
-                        }
-
+                for (i in modules) {
+                    if (paidModules.indexOf(modules[i]._id) != -1) {
+                        allowedModules.push(modules[i]);
                     }
-
                 }
+
             } else {
-                allowedModules.push(modules[i]);
+                allowedModules = modules;
             }
 
+        } else {
+            allowedModules = modules;
         }
 
         return allowedModules;

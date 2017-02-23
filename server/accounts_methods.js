@@ -110,6 +110,15 @@ Meteor.methods({
         // Update products
         Meteor.call('assignCourse', userId, data.courses);
 
+        if (data.modules) {
+            Meteor.call('assignModules', userId, data.courses, data.modules);
+        }
+        if (data.bonuses) {
+            Meteor.call('assignBonuses', userId, data.courses, data.bonuses);
+        }
+
+        console.log(Meteor.users.findOne(userId));
+
         return answer;
 
     },
@@ -201,9 +210,43 @@ Meteor.methods({
         }
 
         // Update
-        // console.log(existingCourses);
         Meteor.users.update(userId, { $set: { courses: existingCourses } });
-        // console.log(Meteor.users.findOne(userId));
+
+    },
+    assignModules: function(userId, course, modules) {
+
+        // Get existing user courses
+        var user = Meteor.users.findOne(userId);
+
+        if (user.modules) {
+            var allModules = user.modules;
+        } else {
+            var allModules = {};
+        }
+
+        // Assign new courses
+        allModules[course] = modules;
+
+        // Update
+        Meteor.users.update(userId, { $set: { modules: allModules } });
+
+    },
+    assignBonuses: function(userId, course, bonuses) {
+
+        // Get existing user courses
+        var user = Meteor.users.findOne(userId);
+
+        if (user.bonuses) {
+            var allBonuses = user.bonuses;
+        } else {
+            var allBonuses = {};
+        }
+
+        // Assign new courses
+        allBonuses[course] = bonuses;
+
+        // Update
+        Meteor.users.update(userId, { $set: { bonuses: allBonuses } });
 
     },
     getAllUsers: function() {

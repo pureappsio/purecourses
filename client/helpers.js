@@ -22,11 +22,17 @@ Template.registerHelper("isTheme", function(theme) {
 });
 
 Template.registerHelper("isAdmin", function() {
-    if (Meteor.user().emails[0].address == 'marcolivier.schwartz@gmail.com') {
-        return true;
-    } else {
-        return false;
+
+    if (Meteor.user()) {
+
+        if (Meteor.user().emails[0].address == 'marcolivier.schwartz@gmail.com') {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+
 });
 
 Template.registerHelper("getMeta", function(meta) {

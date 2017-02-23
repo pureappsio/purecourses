@@ -1,3 +1,7 @@
+// Import SendGrid
+import sendgridModule from 'sendgrid';
+const sendgrid = require('sendgrid')(Meteor.settings.sendGridAPIKey);
+
 Meteor.methods({
 
 	sendEmail: function(emailData) {
@@ -21,6 +25,8 @@ Meteor.methods({
             }
 
         }
+
+        console.log('Sending email to ' + students.length + ' students');
 
         // Build mail
         var helper = sendgridModule.mail;

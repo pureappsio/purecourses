@@ -30,10 +30,10 @@ Template.courseDetails.events({
         // Add
         Meteor.call('addModule', module);
     },
-    'click #add-resource': function() {
+    'click #add-bonus': function() {
 
         // Module
-        resource = {
+        bonus = {
             name: $('#resource-name').val(),
             url: $('#resource-url').val(),
             type: $('#resource-type :selected').val(),
@@ -41,7 +41,7 @@ Template.courseDetails.events({
         };
 
         // Add
-        Meteor.call('addResource', resource);
+        Meteor.call('addBonus', bonus);
     }
 
 });
@@ -54,11 +54,11 @@ Template.courseDetails.helpers({
     lessons: function() {
         return Lessons.find({ courseId: this._id });
     },
-    resources: function() {
-        return Resources.find({ courseId: this._id, moduleId: { $exists: false } });
+    bonuses: function() {
+        return Session.get('allowedBonuses');
     },
-    areResources: function() {
-        if (Resources.find({ courseId: this._id, moduleId: { $exists: false } }).fetch().length == 0) {
+    areBonuses: function() {
+        if (Session.get('allowedBonuses').length == 0) {
             return false;
         } else {
             return true;
@@ -94,6 +94,7 @@ Template.courseDetails.rendered = function() {
 
         var user = Meteor.user();
         var modules = Modules.find({ courseId: courseId }, { sort: { order: 1 } }).fetch();
+        var bonuses = Bonuses.find({ courseId: courseId }, { sort: { order: 1 } }).fetch();
 
         // Get right modules
         if (user.emails[0].address == 'marcolivier.schwartz@gmail.com') {
@@ -102,6 +103,17 @@ Template.courseDetails.rendered = function() {
 
             Meteor.call('getAllowedModules', user._id, courseId, function(err, modules) {
                 Session.set('allowedModules', modules);
+            });
+
+        }
+
+        // Get right bonuses
+        if (user.emails[0].address == 'marcolivier.schwartz@gmail.com') {
+            Session.set('allowedBonuses', modules);
+        } else {
+
+            Meteor.call('getAllowedBonuses', user._id, courseId, function(err, bonuses) {
+                Session.set('allowedBonuses', bonuses);
             });
 
         }

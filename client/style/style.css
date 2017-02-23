@@ -81,12 +81,12 @@ body {
     cursor: pointer;
 }
 
-video {
+/*video {
     width: 100%;
     height: auto;
     border: 1px solid black;
 }
-
+*/
 .possible-course-picture {
     filter: grayscale(100%) opacity(50%);
 }

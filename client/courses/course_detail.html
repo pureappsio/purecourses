@@ -42,11 +42,11 @@
             </select>
         </div>
         <div class='col-md-3'>
-            <button id='add-resource' class='btn btn-block btn-primary'>Add bonus</button>
+            <button id='add-bonus' class='btn btn-block btn-primary'>Add bonus</button>
         </div>
     </div>
-    {{/if}} {{#if areResources}}
-    <h3>Bonuses</h3> {{/if}} {{#each resources}} {{> resource}} {{/each}}
+    {{/if}} {{#if areBonuses}}
+    <h3>Bonuses</h3> {{/if}} {{#each bonuses}} {{> bonus}} {{/each}}
     <div class="row voffset30">
         <div class="col-md-3"></div>
         <div class="col-md-6">
