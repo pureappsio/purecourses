@@ -1,9 +1,16 @@
 <template name="admin">
-    <h3>Users</h3> {{#each users}} {{> user}} {{/each}}
-   <!--  <h3>Change Role</h3>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Users</h3></div>
+    </div>
+    {{#each users}} {{> user}} {{/each}}
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Change Role</h3></div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
-            <select class='form-control' id='user-id' multiple data-actions-box="true">
+            <select class='form-control' id='user-id'>
                 {{#each users}} {{> userListing}} {{/each}}
             </select>
         </div>
@@ -17,7 +24,11 @@
             <button id='set-role' class='btn btn-block btn-primary'>Set Role</button>
         </div>
     </div>
-    <h3>Assign Teacher</h3>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Assign Teacher</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
             <select class='form-control' id='app-user-id'>
@@ -25,19 +36,28 @@
             </select>
         </div>
         <div class='col-md-2'>
-            <select class='form-control' id='student-id' multiple data-actions-box="true">
+            <select class='form-control' id='student-id'>
                 {{#each students}} {{> userListing}} {{/each}}
             </select>
         </div>
         <div class='col-md-2'>
             <button id='assign-teacher' class='btn btn-block btn-primary'>Assign Teacher</button>
         </div>
-    </div> -->
-    <h3>Courses</h3> {{#each courses}} {{> courseAdmin}} {{/each}}
-    <!-- <h3>Change Owner of Course</h3>
+    </div>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Courses</h3>
+        </div>
+    </div>
+    {{#each courses}} {{> courseAdmin}} {{/each}}
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Change Owner of Course</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
-            <select class='form-control' id='course-id' multiple data-actions-box="true">
+            <select class='form-control' id='course-id'>
                 {{#each courses}} {{> courseSelect}} {{/each}}
             </select>
         </div>
@@ -49,8 +69,12 @@
         <div class='col-md-3'>
             <button id='set-course-owner' class='btn btn-block btn-primary'>Set Course Owner</button>
         </div>
-    </div> -->
-    <h3>API Key</h3>
+    </div>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>API Key</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
             <button id='generate-key' class='btn btn-block btn-primary'>Generate API Key</button>
@@ -59,7 +83,11 @@
             <span id='api-key'>{{key}}</span>
         </div>
     </div>
-    <h3>Add Integration</h3>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Add integration</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-1'>Type: </div>
         <div class='col-md-2'>
@@ -79,5 +107,9 @@
             <button id='add-integration' class='btn btn-block btn-primary'>Link</button>
         </div>
     </div>
-    <h3>Integrations</h3> {{#each integrations}} {{> integration}} {{/each}}
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Integrations</h3>
+        </div>
+    </div> {{#each integrations}} {{> integration}} {{/each}}
 </template>

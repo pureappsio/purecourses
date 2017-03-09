@@ -1,29 +1,15 @@
 Template.admin.onRendered(function() {
 
-    // $('#user-id').selectpicker();
-    // $('#student-id').selectpicker();
-    // $('#course-id').selectpicker();
+    // // Get all users
+    // Meteor.call('getUsersEmails', function(err, users) {
 
-    // if (this.data) {
-    //     $('#user-id').selectpicker('refresh');
-    //     $('#student-id').selectpicker('refresh');
-    //     $('#course-id').selectpicker('refresh');
-    // }
+    //     Session.set('users', users);
 
-    // Get all users
-    Meteor.call('getAllUsers', function(err, users) {
-        console.log(users);
+    //     $("#user-id").autocomplete({
+    //         source: users
+    //     });
 
-        Session.set('users', users);
-
-        // Fill users
-        for (i = 0; i < users.length; i++) {
-            $('#users').append($('<option>', {
-                value: users[i]._id,
-                text: users[i].emails[0].address
-            }));
-        }
-    });
+    // });
 });
 
 Template.admin.events({
@@ -47,17 +33,17 @@ Template.admin.events({
     },
     'click #set-role': function() {
 
-        Meteor.call('setUserRole', $('#user-id').val(), $('#user-role :selected').val());
+        Meteor.call('setUserRole', $('#user-id :selected').val(), $('#user-role :selected').val());
 
     },
     'click #set-course-owner': function() {
 
-        Meteor.call('setCourseOwner', $('#course-user-id :selected').val(), $('#course-id').val());
+        Meteor.call('setCourseOwner', $('#course-user-id :selected').val(), $('#course-id :selected').val());
 
     },
     'click #assign-teacher': function() {
 
-        Meteor.call('assignTeacher', $('#app-user-id :selected').val(), $('#student-id').val());
+        Meteor.call('assignTeacher', $('#app-user-id :selected').val(), $('#student-id :selected').val());
 
     }
 });

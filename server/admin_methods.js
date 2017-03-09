@@ -1,11 +1,23 @@
 Meteor.methods({
 
-    assignTeacher: function(userId, studentId) {
+    getUsersEmails: function() {
 
-        for (i in studentId) {
-            Meteor.users.update(studentId[i], { $set: { teacherId: userId } });
+        var users = Meteor.users.find({}).fetch();
+
+        var emails = [];
+
+        for (i in users) {
+
+            emails.push(users[i].emails[0].address);
 
         }
+
+        return emails;
+
+    },
+    assignTeacher: function(userId, studentId) {
+
+        Meteor.users.update(studentId, { $set: { teacherId: userId } });
 
     },
     setCourseOwner: function(userId, courseId) {
@@ -13,19 +25,12 @@ Meteor.methods({
         console.log(courseId);
         console.log(userId);
 
-        for (i in courseId) {
-
-            Courses.update(courseId[i], { $set: { userId: userId } });
-
-        }
+        Courses.update(courseId, { $set: { userId: userId } });
 
     },
     setUserRole: function(userId, role) {
 
-        for (i in userId) {
-            Meteor.users.update(userId[i], { $set: { role: role } });
-
-        }
+        Meteor.users.update(userId, { $set: { role: role } });
 
     },
     getUserDomain: function(domain) {

@@ -1,5 +1,9 @@
 <template name="settings">
-    <h3>General Settings</h3>
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>General Settings</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-6'>
             <input id='new-title' type='text' class='form-control' value="{{getMeta 'title'}}" placeholder="Title ...">
@@ -35,7 +39,11 @@
             <button id='set-language' class='btn btn-block btn-primary'>Set Language</button>
         </div>
     </div>
-    <h3>Domain</h3>
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>Domain</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-5'>
             Your domain is: {{domain}}
@@ -44,7 +52,11 @@
             <a target='_blank' href='http://{{domain}}?preview=true'>See a preview</a>
         </div>
     </div>
-    <h3>Theme</h3>
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>Theme</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-6'>
             <select id='theme' class='form-control'>
@@ -56,8 +68,16 @@
             <button id='set-theme' class='btn btn-block btn-primary'>Set Theme</button>
         </div>
     </div>
-    <h3>Students</h3> {{#each students}} {{> user}} {{/each}}
-    <h3>Assign Course to Student</h3>
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>Students</h3>
+        </div>
+    </div> {{#each students}} {{> user}} {{/each}}
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>Assign Course to Student</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
             <select class='form-control' id='users'>
@@ -73,19 +93,21 @@
             <button id='assign-course' class='btn btn-block btn-primary'>Assign Course</button>
         </div>
     </div>
-    <h3>Create Student Account</h3>
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>Create Student Account</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
-           <input id='student-email' type='text' class='form-control' placeholder="Student email ...">
+            <input id='student-email' type='text' class='form-control' placeholder="Student email ...">
         </div>
         <div class='col-md-3'>
-             <input id='student-password' type='text' class='form-control' placeholder="Student password ...">
+            <input id='student-password' type='text' class='form-control' placeholder="Student password ...">
         </div>
         <div class='col-md-3'>
             <button id='create-student-account' class='btn btn-block btn-primary'>Create Account</button>
         </div>
     </div>
-
     <div class='voffset50'></div>
-    
 </template>
