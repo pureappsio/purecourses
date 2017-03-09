@@ -34,17 +34,6 @@ Meteor.methods({
         } catch (err) {
             var sales = [];
         }
-        // var sales = [];
-
-        // for (k = 0; k < answer.length; k++) {
-
-        //     if (answer[k].products) {
-        //         if ((answer[k].products).indexOf(productId) != -1) {
-        //             sales.push(answer[k]);
-        //         }
-        //     }
-
-        // }
 
         return sales;
 
@@ -86,7 +75,7 @@ Meteor.methods({
     },
     validateApiKey: function(key) {
 
-        var adminUser = Meteor.users.findOne({ apiKey: { $exists: true } });
+        var adminUser = Meteor.users.findOne({ role: 'admin', apiKey: { $exists: true } });
 
         if (adminUser.apiKey == key) {
             return true;

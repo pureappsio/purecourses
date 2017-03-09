@@ -1,11 +1,15 @@
 <template name="courseDetails">
-    <h3>{{name}}</h3> {{#if isAdmin}} {{#if isTheme 'full'}}
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>{{name}}</h3> </div>
+    </div>
+    {{#if isAppUser}} {{#if isTheme 'full'}}
     <div class='row'>
         <div class='col-md-1'>
-            <input id='module-order' type='text' class='form-control'>
+            <input id='module-order' placeholder="Number..." type='text' class='form-control'>
         </div>
         <div class='col-md-6'>
-            <input id='module-name' type='text' class='form-control'>
+            <input id='module-name' placeholder="Module name..." type='text' class='form-control'>
         </div>
         <div class='col-md-2'>
             <button id='add-module' class='btn btn-block btn-primary'>Add new module</button>
@@ -26,7 +30,7 @@
             <button id='add-lesson' class='btn btn-block btn-primary'>Add new lesson</button>
         </div>
     </div>
-    {{/if}} {{/if}} {{#if isTheme 'full'}} {{#each modules}} {{> module}} {{/each}} {{/if}} {{#if isTheme 'simple'}} {{#each lessons}} {{> lesson}} {{/each}} {{/if}} {{#if isAdmin}}
+    {{/if}} {{/if}} {{#if isTheme 'full'}} {{#each modules}} {{> module}} {{/each}} {{/if}} {{#if isTheme 'simple'}} {{#each lessons}} {{> lesson}} {{/each}} {{/if}} {{#if isAppUser}}
     <h3>Add Bonus</h3>
     <div class='row'>
         <div class='col-md-3'>
@@ -45,8 +49,16 @@
             <button id='add-bonus' class='btn btn-block btn-primary'>Add bonus</button>
         </div>
     </div>
-    {{/if}} {{#if areBonuses}}
-    <h3>Bonuses</h3> {{/if}} {{#each bonuses}} {{> bonus}} {{/each}}
+    {{/if}} 
+    {{#if bonuses}}
+
+    <div class="row voffset30">
+        <div class="col-md-3"><h3>Bonuses</h3> </div>
+    </div>
+
+    {{/if}} 
+
+    {{#each bonuses}} {{> bonus}} {{/each}}
     <div class="row voffset30">
         <div class="col-md-3"></div>
         <div class="col-md-6">

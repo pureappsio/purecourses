@@ -23,18 +23,36 @@ Template.registerHelper("isTheme", function(theme) {
 
 Template.registerHelper("isAdmin", function() {
 
-    if (Meteor.user()) {
+    if (Session.get('preview')) {
+        return false;
 
-        if (Meteor.user().emails[0].address == 'marcolivier.schwartz@gmail.com') {
-            return true;
-        } else {
-            return false;
+    } else {
+        if (Meteor.user()) {
+
+            if (Meteor.user().role == 'admin') {
+                return true;
+            }
         }
     }
 
+});
+
+Template.registerHelper("isAppUser", function() {
+
+    if (Session.get('preview')) {
+        return false;
+
+    } else {
+        if (Meteor.user()) {
+
+            if (Meteor.user().role == 'appuser' || Meteor.user().role == 'admin') {
+                return true;
+            }
+        }
+    }
 
 });
 
 Template.registerHelper("getMeta", function(meta) {
-    return Metas.findOne({ type: meta }).value;
+    return Metas.findOne({ type: meta, userId: Meteor.user()._id }).value;
 });

@@ -1,0 +1,91 @@
+<template name="settings">
+    <h3>General Settings</h3>
+    <div class='row'>
+        <div class='col-md-6'>
+            <input id='new-title' type='text' class='form-control' value="{{getMeta 'title'}}" placeholder="Title ...">
+        </div>
+        <div class='col-md-3'>
+            <button id='set-title' class='btn btn-block btn-primary'>Set Title</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-6'>
+            <input id='new-icon' type='text' class='form-control' placeholder="Icon ..." value="{{getMeta 'icon'}}">
+        </div>
+        <div class='col-md-3'>
+            <button id='set-icon' class='btn btn-block btn-primary'>Set Icon</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-3'>
+            <input id='user-name' type='text' class='form-control' value="{{getMeta 'userName'}}" placeholder="User name ...">
+        </div>
+        <div class='col-md-3'>
+            <input id='user-email' type='text' class='form-control' placeholder="User email ..." value="{{getMeta 'userEmail'}}">
+        </div>
+        <div class='col-md-3'>
+            <button id='set-user-data' class='btn btn-block btn-primary'>Set User Data</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-6'>
+            <input value="{{getMeta 'language'}}" id='language' type='text' class='form-control' placeholder="Language ...">
+        </div>
+        <div class='col-md-3'>
+            <button id='set-language' class='btn btn-block btn-primary'>Set Language</button>
+        </div>
+    </div>
+    <h3>Domain</h3>
+    <div class='row'>
+        <div class='col-md-5'>
+            Your domain is: {{domain}}
+        </div>
+        <div class='col-md-3'>
+            <a target='_blank' href='http://{{domain}}?preview=true'>See a preview</a>
+        </div>
+    </div>
+    <h3>Theme</h3>
+    <div class='row'>
+        <div class='col-md-6'>
+            <select id='theme' class='form-control'>
+                <option value='full'>Full</option>
+                <option value='simple'>Simple</option>
+            </select>
+        </div>
+        <div class='col-md-3'>
+            <button id='set-theme' class='btn btn-block btn-primary'>Set Theme</button>
+        </div>
+    </div>
+    <h3>Students</h3> {{#each students}} {{> user}} {{/each}}
+    <h3>Assign Course to Student</h3>
+    <div class='row'>
+        <div class='col-md-3'>
+            <select class='form-control' id='users'>
+                {{#each students}} {{> userListing}} {{/each}}
+            </select>
+        </div>
+        <div class='col-md-3'>
+            <select class='form-control' id='courses'>
+                {{#each courses}}{{> courseListing}} {{/each}}
+            </select>
+        </div>
+        <div class='col-md-3'>
+            <button id='assign-course' class='btn btn-block btn-primary'>Assign Course</button>
+        </div>
+    </div>
+    <h3>Create Student Account</h3>
+    <div class='row'>
+        <div class='col-md-3'>
+           <input id='student-email' type='text' class='form-control' placeholder="Student email ...">
+        </div>
+        <div class='col-md-3'>
+             <input id='student-password' type='text' class='form-control' placeholder="Student password ...">
+        </div>
+        <div class='col-md-3'>
+            <button id='create-student-account' class='btn btn-block btn-primary'>Create Account</button>
+        </div>
+    </div>
+
+    <div class='voffset50'></div>
+    
+</template>

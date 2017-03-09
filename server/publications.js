@@ -1,36 +1,37 @@
-Meteor.publish("userCourses", function () {
+Meteor.publish("userCourses", function() {
 
-	return Courses.find({});
+    return Courses.find({});
 });
 
-Meteor.publish("userModules", function () {
-	return Modules.find({});
+Meteor.publish("userModules", function() {
+    return Modules.find({});
 });
 
-Meteor.publish("userLessons", function () {
-	return Lessons.find({});
+Meteor.publish("userLessons", function() {
+    return Lessons.find({});
 });
 
-Meteor.publish("userBonuses", function () {
-	return Bonuses.find({});
+Meteor.publish("userBonuses", function() {
+    return Bonuses.find({});
 });
 
-Meteor.publish("userResources", function () {
-	return Resources.find({});
+Meteor.publish("userResources", function() {
+    return Resources.find({});
 });
 
-Meteor.publish("userProducts", function () {
-	return Products.find({});
+Meteor.publish("userIntegrations", function() {
+    return Integrations.find({ userId: this.userId });
 });
 
-Meteor.publish("userIntegrations", function () {
-	return Integrations.find({});
+Meteor.publish("userMetas", function() {
+    return Metas.find({ userId: this.userId });
 });
 
-Meteor.publish("userMetas", function () {
-	return Metas.find({});
+Meteor.publish("allUsers", function() {
+    return Meteor.users.find({});
 });
 
-Meteor.publish("allUsers", function () {
-	return Meteor.users.find({}, {products: 1});
+Meteor.publish('allFiles', function() {
+    return Files.find().cursor;
 });
+

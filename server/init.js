@@ -10,4 +10,6 @@ Meteor.startup(function() {
         }
     });
 
+    // Create admin
+    Meteor.call('createUsers');
 });

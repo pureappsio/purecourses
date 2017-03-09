@@ -4,7 +4,15 @@ Meteor.methods({
 
         // Get user
         var user = Meteor.users.findOne(userId);
-        var modules = Modules.find({ courseId: courseId }, { sort: { order: 1 } }).fetch();
+        console.log(user);
+
+        // Get modules
+        if (user.role == 'admin' || user.role == 'appuser') {
+            var query = { courseId: courseId };
+        } else {
+            var query = { courseId: courseId };
+        }
+        var modules = Modules.find(query, { sort: { order: 1 } }).fetch();
 
         console.log(modules);
 

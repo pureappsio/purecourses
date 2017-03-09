@@ -1,17 +1,19 @@
 <template name="course">
-
-  <div class='col-md-4'>
-  	<a href='/courses/{{_id}}'><img class='img-responsive' src='{{imgUrl}}'></a>
-    <div class='voffset30 col-centered'>
-    	<a class='btn btn-primary btn-lg' href='/courses/{{_id}}'>
+    <div class='col-md-4'>
+        <a href='/courses/{{_id}}'><img class='img-fluid' src='{{url}}'></a>
+        <div class='voffset30 col-centered'>
+            <a class='btn btn-primary btn-lg' href='/courses/{{_id}}'>
         {{#if isTheme 'full'}}Go to the Course{{/if}}
         {{#if isTheme 'simple'}}{{name}}{{/if}}
       </a>
+        </div>
+        {{#if isAppUser}}
+        <div class='row voffset15'>
+            <div class='col-md-6'> <a href='/courses/edit/{{_id}}' class='btn btn-warning btn-block'>Edit</a></div>
+            <div class='col-md-6'>
+                <button class='btn btn-danger btn-block delete'>Delete</button>
+            </div>
+        </div>
+        {{/if}}
     </div>
-    {{#if isAdmin}}
-	  <div><a href='/courses/edit/{{_id}}' class='btn btn-warning btn-block'>Edit</a></div>
-	  <div><button class='btn btn-danger btn-block delete'>Delete</button></div>
-	{{/if}}
-  </div>
-
 </template>

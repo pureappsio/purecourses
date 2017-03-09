@@ -5,8 +5,9 @@ Tracker.autorun(function() {
     Meteor.subscribe('userLessons');
     Meteor.subscribe('userResources');
     Meteor.subscribe('userBonuses');
-    Meteor.subscribe('userProducts');
+    // Meteor.subscribe('userProducts');
     Meteor.subscribe('allUsers');
     Meteor.subscribe('userIntegrations');
     Meteor.subscribe('userMetas');
+    Meteor.subscribe('allFiles');
 });

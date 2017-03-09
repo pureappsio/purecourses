@@ -5,7 +5,7 @@
 	<div class='col-md-1'>{{order}}</div>
 	<div class='col-md-9'><a href='/modules/{{_id}}'>{{name}}</a></div>
 	
-	{{#if isAdmin}}
+	{{#if isAppUser}}
 	<div class='col-md-1'><a href='/modules/edit/{{_id}}' class='btn btn-warning btn-block'>Edit</a></div>
 	<div class='col-md-1'><button class='btn btn-danger btn-block delete'>Delete</button></div>
 	{{/if}}

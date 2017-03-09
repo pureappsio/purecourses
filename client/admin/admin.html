@@ -1,87 +1,53 @@
 <template name="admin">
-    <h3>General Settings</h3>
-    <div class='row'>
-        <div class='col-md-6'>
-            <input id='new-title' type='text' class='form-control' placeholder="Title ...">
-        </div>
-        <div class='col-md-3'>
-            <button id='set-title' class='btn btn-block btn-primary'>Set Title</button>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col-md-6'>
-            <input id='new-icon' type='text' class='form-control' placeholder="Icon ..." value="{{getMeta 'icon'}}">
-        </div>
-        <div class='col-md-3'>
-            <button id='set-icon' class='btn btn-block btn-primary'>Set Icon</button>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col-md-3'>
-            <input id='user-name' type='text' class='form-control' placeholder="User name ..." value="{{userName}}">
-        </div>
-        <div class='col-md-3'>
-            <input id='user-email' type='text' class='form-control' placeholder="User email ..." value="{{userEmail}}">
-        </div>
-        <div class='col-md-3'>
-            <button id='set-user-data' class='btn btn-block btn-primary'>Set User Data</button>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col-md-6'>
-            <input id='language' type='text' class='form-control' placeholder="Language ...">
-        </div>
-        <div class='col-md-3'>
-            <button id='set-language' class='btn btn-block btn-primary'>Set Language</button>
-        </div>
-    </div>
-    <h3>Theme</h3>
-    <div class='row'>
-        <div class='col-md-6'>
-            <select id='theme' class='form-control'>
-                <option value='full'>Full</option>
-                <option value='simple'>Simple</option>
-            </select>
-        </div>
-        <div class='col-md-3'>
-            <button id='set-theme' class='btn btn-block btn-primary'>Set Theme</button>
-        </div>
-    </div>
     <h3>Users</h3> {{#each users}} {{> user}} {{/each}}
-    <h3>Assign Course to User</h3>
+   <!--  <h3>Change Role</h3>
     <div class='row'>
         <div class='col-md-3'>
-            <select class='form-control' id='users'>
+            <select class='form-control' id='user-id' multiple data-actions-box="true">
+                {{#each users}} {{> userListing}} {{/each}}
+            </select>
+        </div>
+        <div class='col-md-2'>
+            <select class='form-control' id='user-role'>
+                <option value='student'>Student</option>
+                <option value='appuser'>App User</option>
+            </select>
+        </div>
+        <div class='col-md-2'>
+            <button id='set-role' class='btn btn-block btn-primary'>Set Role</button>
+        </div>
+    </div>
+    <h3>Assign Teacher</h3>
+    <div class='row'>
+        <div class='col-md-3'>
+            <select class='form-control' id='app-user-id'>
+                {{#each appUsers}} {{> userListing}} {{/each}}
+            </select>
+        </div>
+        <div class='col-md-2'>
+            <select class='form-control' id='student-id' multiple data-actions-box="true">
+                {{#each students}} {{> userListing}} {{/each}}
+            </select>
+        </div>
+        <div class='col-md-2'>
+            <button id='assign-teacher' class='btn btn-block btn-primary'>Assign Teacher</button>
+        </div>
+    </div> -->
+    <h3>Courses</h3> {{#each courses}} {{> courseAdmin}} {{/each}}
+    <!-- <h3>Change Owner of Course</h3>
+    <div class='row'>
+        <div class='col-md-3'>
+            <select class='form-control' id='course-id' multiple data-actions-box="true">
+                {{#each courses}} {{> courseSelect}} {{/each}}
             </select>
         </div>
         <div class='col-md-3'>
-            <select class='form-control' id='courses'>
-                {{#each courses}}{{> courseListing}} {{/each}}
+            <select class='form-control' id='course-user-id'>
+                {{#each users}} {{> userListing}} {{/each}}
             </select>
         </div>
         <div class='col-md-3'>
-            <button id='assign-course' class='btn btn-block btn-primary'>Assign Course</button>
-        </div>
-    </div>
-    <h3>Create All Accounts</h3>
-    <div class='row'>
-        <!-- <div class='col-md-3'>
-            <select class='form-control' id='accounts-products'></select>
-        </div> -->
-        <div class='col-md-3'>
-            <input id='password' type='text' class='form-control' placeholder="Password ...">
-        </div>
-        <div class='col-md-3'>
-            <button id='create-accounts' class='btn btn-block btn-primary'>Create Accounts</button>
-        </div>
-    </div>
-<!--     <h3>Assign product to all users</h3>
-    <div class='row'>
-        <div class='col-md-3'>
-            <select class='form-control' id='all-products'></select>
-        </div>
-        <div class='col-md-3'>
-            <button id='assign-product-all' class='btn btn-block btn-primary'>Assign Product</button>
+            <button id='set-course-owner' class='btn btn-block btn-primary'>Set Course Owner</button>
         </div>
     </div> -->
     <h3>API Key</h3>
@@ -109,9 +75,6 @@
         <div class='col-md-2'>
             <input class='form-control' id='integration-key'>
         </div>
-        <!--  <div class='col-md-1'>Token: </div>
-
-  <div class='col-md-2'><input class='form-control' id='edd-token'></div> -->
         <div class='col-md-2'>
             <button id='add-integration' class='btn btn-block btn-primary'>Link</button>
         </div>

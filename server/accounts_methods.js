@@ -4,6 +4,13 @@ const sendgrid = require('sendgrid')(Meteor.settings.sendGridAPIKey);
 
 Meteor.methods({
 
+    setUserDomain: function(domain) {
+
+        Meteor.users.update(Meteor.user()._id, {$set: {domain: domain}});
+
+        console.log(Meteor.user());
+
+    },
     createAccounts: function(password) {
 
         // Get all products
@@ -61,6 +68,70 @@ Meteor.methods({
 
     },
 
+    createUserAccount: function(data) {
+
+        console.log(data);
+
+        // Check if exist
+        if (Meteor.users.findOne({ "emails.0.address": data.email })) {
+
+            console.log('Updating existing student');
+            var userId = Meteor.users.findOne({ "emails.0.address": data.email })._id;
+
+        } else {
+
+            console.log('Creating new student');
+
+            // Create
+            var userId = Accounts.createUser({
+                email: data.email,
+                password: data.password
+            });
+
+            // Assign role & teacher ID
+            Meteor.users.update(userId, {$set: {role: data.role}});
+            Meteor.users.update(userId, {$set: {teacherId: data.teacherId}});
+
+        }
+
+        return userId;
+
+    },
+    createNewAppUser: function(data) {
+
+        console.log(data);
+
+        // Prepare answer
+        answer = {};
+
+        // Check if exist
+        if (Meteor.users.findOne({ "emails.0.address": data.email })) {
+
+            console.log('Updating existing user');
+            var userId = Meteor.users.findOne({ "emails.0.address": data.email })._id;
+            answer.message = "User already exists";
+
+        } else {
+
+            console.log('Creating new user');
+
+            // Create
+            var userId = Accounts.createUser({
+                email: data.email,
+                password: data.password
+            });
+
+            // Assign role
+            Meteor.users.update(userId, {$set: {role: 'appuser'}});
+
+        }
+
+        // Return userID
+        answer.userId = userId;
+
+        return answer;
+
+    },
     createNewUser: function(data) {
 
         console.log(data);
@@ -92,10 +163,15 @@ Meteor.methods({
                 }
             }
 
+            // Get admin user
+            var adminUser = Meteor.users.findOne({role: 'admin'});
+
             // Create
             var userId = Accounts.createUser({
                 email: data.email,
-                password: password
+                password: password,
+                role: 'student',
+                teacherId: adminUser._id
             });
 
             // Return password
@@ -149,29 +225,65 @@ Meteor.methods({
         }
 
     },
-    // assignProducts: function(userId, products) {
+    createUsers: function() {
 
-    //     // Get existing user products
-    //     var user = Meteor.users.findOne(userId);
+        // Create admin user
+        var adminUser = {
+            email: Meteor.settings.adminUser.email,
+            password: Meteor.settings.adminUser.password,
+            role: 'admin'
+        }
+        Meteor.call('createAdminUser', adminUser);
 
-    //     if (user.products) {
-    //         var existingProducts = user.products;
-    //     } else {
-    //         var existingProducts = [];
-    //     }
+    },
+    createStudentAccount: function(data) {
 
-    //     // Assign new products
-    //     for (i = 0; i < products.length; i++) {
-    //         if (existingProducts.indexOf(products[i]) == -1) {
-    //             existingProducts.push(products[i]);
-    //         }
-    //     }
+        console.log(data);
 
-    //     // Update
-    //     console.log(existingProducts);
-    //     Meteor.users.update(userId, { $set: { products: existingProducts } });
+        // Check if exist
+        if (Meteor.users.findOne({ "emails.0.address": data.email })) {
 
-    // },
+            console.log('User already created');
+            var userId = Meteor.users.findOne({ "emails.0.address": data.email })._id;
+
+        } else {
+
+            console.log('Creating new user');
+
+            // Create
+            var userId = Accounts.createUser(data);
+
+            // Change role
+            Meteor.users.update(userId, { $set: { role: data.role } });
+            Meteor.users.update(userId, { $set: { teacherId: data.teacherId } });
+            console.log(Meteor.users.findOne(userId));
+
+        }
+
+    },
+    createAdminUser: function(data) {
+
+        // Check if exist
+        if (Meteor.users.findOne({ "emails.0.address": data.email })) {
+
+            console.log('User already created');
+            Meteor.users.update({ "emails.0.address": data.email }, { $set: { role: data.role } });
+            var userId = Meteor.users.findOne({ "emails.0.address": data.email })._id;
+
+        } else {
+
+            console.log('Creating new user');
+
+            // Create
+            var userId = Accounts.createUser(data);
+
+            // Change role
+            Meteor.users.update(userId, { $set: { role: data.role } });
+            console.log(Meteor.users.findOne(userId));
+
+        }
+
+    },
     assignCourses: function(userId, courses) {
 
         // Get existing user courses

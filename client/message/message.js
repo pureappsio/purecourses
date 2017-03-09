@@ -6,7 +6,7 @@ Template.message.events({
             userId: Meteor.user()._id,
             courseId: $('#course-id :selected').val(),
             subject: $('#email-subject').val(),
-            text: $('#email-text').summernote('code')
+            text: CKEDITOR.instances['email-text'].getData()
         }
 
         Meteor.call('sendEmail', email, function(err, data) {
@@ -29,8 +29,7 @@ Template.message.helpers({
 
 Template.message.onRendered(function() {
 
-    $('#email-text').summernote({
-        height: 300
-    });
+    // Init editor
+    CKEDITOR.replace('email-text');
 
 });

@@ -1,18 +1,55 @@
+Template.lessonDetails.helpers({
+
+    videoUrl: function() {
+        if (this.url) {
+            return this.url;
+        }
+        if (this.videoId) {
+            return Files.findOne(this.videoId).link();
+        }
+    },
+    isAudio: function() {
+
+        if (this.videoId) {
+            var file = Files.findOne(this.videoId);
+            if (file.ext == 'mp3' || file.ext == 'wav' || file.ext == 'ogg') {
+                return true;
+            }
+        }
+
+    },
+    audioUrl: function() {
+
+        if (this.videoId) {
+            return Files.findOne(this.videoId).link();
+        }
+
+    },
+    isText: function() {
+        if (this.text) {
+            return true;
+        }
+    },
+    isVideo: function() {
+        if (this.url) {
+            return true;
+        } else if (this.videoId) {
+            var file = Files.findOne(this.videoId);
+            if (file.ext == 'mp4' || file.ext == 'mov' || file.ext == 'avi') {
+                return true;
+            }
+        }
+    }
+
+});
+
 Template.lessonDetails.onRendered(function() {
-
-    // var oldPlayer = document.getElementById('#lesson-video');
-    // videojs(oldPlayer).dispose();
-
-
 
     if (this.data) {
 
-    	if(videojs.getPlayers()['lesson-video']) {
-	    delete videojs.getPlayers()['lesson-video'];
-	}
-
-  //   	var player = videojs('#lesson-video');
-		// player.dispose();
+        if (videojs.getPlayers()['lesson-video']) {
+            delete videojs.getPlayers()['lesson-video'];
+        }
 
         // Url
         var videoUrl = this.data.url;
@@ -23,23 +60,7 @@ Template.lessonDetails.onRendered(function() {
             player.load();
 
         });
-        // videojs("#lesson-video").ready(function() {
 
-        // 	console.log('Loading');
-        //     var myPlayer = this;
-
-        //     // myPlayer.src({
-        //     //     src: videoUrl,
-        //     //     type: 'video/mp4'
-        //     // });
-        //     myPlayer.load();
-
-        //     // Leaving
-        //     $(window).bind('beforeunload', function() {
-        //         myPlayer.destroy();
-        //     });
-
-        // });
     }
 
 });

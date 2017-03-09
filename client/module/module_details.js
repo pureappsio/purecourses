@@ -1,51 +1,66 @@
 Template.moduleDetails.events({
 
-  'click #add-lesson': function() {
+    'click #add-lesson': function() {
 
-  	// Module
-  	lesson = {
-  	  name: $('#lesson-name').val(),
-      url: $('#lesson-url').val(),
-      order: parseFloat($('#lesson-order').val()),
-      moduleId: this._id,
-      courseId: this.courseId
-  	};
+        // Module
+        lesson = {
+            name: $('#lesson-name').val(),
+            order: parseFloat($('#lesson-order').val()),
+            moduleId: this._id,
+            courseId: this.courseId,
+            userId: Meteor.user()._id
+        };
 
-  	// Add
-  	Meteor.call('addLesson', lesson);
-  },
-   'click #add-resource': function() {
+        if (Session.get('lessonVideo')) {
+            lesson.videoId = Session.get('lessonVideo');
+        }
 
-    // Module
-    resource = {
-      name: $('#resource-name').val(),
-      url: $('#resource-url').val(),
-      type: $('#resource-type :selected').val(),
-      moduleId: this._id,
-      courseId: this.courseId
-    };
+        if (CKEDITOR.instances['lesson-text'].getData() != '<p><br></p>') {
+            lesson.text = CKEDITOR.instances['lesson-text'].getData();
+        }
 
-    // Add
-    Meteor.call('addResource', resource);
-  }
+        // Add
+        Meteor.call('addLesson', lesson);
+    },
+    'click #add-resource': function() {
+
+        // Module
+        resource = {
+            name: $('#resource-name').val(),
+            url: $('#resource-url').val(),
+            type: $('#resource-type :selected').val(),
+            moduleId: this._id,
+            courseId: this.courseId,
+            userId: Meteor.user()._id
+        };
+
+        // Add
+        Meteor.call('addResource', resource);
+    }
 
 });
 
 Template.moduleDetails.helpers({
 
-  lessons: function() {
-  	return Lessons.find({moduleId: this._id}, {sort: {order: 1}});
-  },
-  resources: function() {
-    return Resources.find({moduleId: this._id});
-  },
-  areResources: function() {
-    if (Resources.find({moduleId: this._id}).fetch().length == 0) {
-      return false;
+    lessons: function() {
+        return Lessons.find({ moduleId: this._id }, { sort: { order: 1 } });
+    },
+    resources: function() {
+        return Resources.find({ moduleId: this._id });
+    },
+    areResources: function() {
+        if (Resources.find({ moduleId: this._id }).fetch().length == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
-    else {
-      return true;
-    }
-  }
+
+});
+
+Template.moduleDetails.onRendered(function() {
+
+    // Init editor
+    CKEDITOR.replace('lesson-text');
 
 });

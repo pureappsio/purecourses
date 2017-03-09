@@ -1,0 +1,39 @@
+<template name="home">
+    <div class='row voffset30'>
+        <div class='col-md-6'>
+            <h3>{{#if isTheme 'simple'}}Videos{{else}}Courses{{/if}}</h3>
+        </div>
+    </div>
+    {{#if isAppUser}}
+    <div class='row'>
+        <div class='col-md-2'></div>
+        <div class='col-md-3'>
+            <label for='course-name'>Course Name</label>
+            <input id='course-name' type='text' class='form-control' placeholder="Name ...">
+        </div>
+        <div class='col-md-3'>
+            <!-- <input id='course-img-url' type='text' class='form-control' placeholder="Img url ..."> -->
+            <label for='upload-form'>Course Display Picture</label>
+            {{> uploadForm fileId="coursePicture"}}
+        </div>
+        <div class='col-md-2'>
+            <label for='access'>Access</label>
+            <select class='form-control' id='access'>
+                <option value='paid'>Paid Content</option>
+                <option value='free'>Free Content</option>
+            </select>
+        </div>
+    </div>
+    <div class='row voffset30'>
+        <div class='col-md-2'></div>
+        <div class='col-md-8'>
+            <button id='add-course' class='btn btn-lg btn-block btn-primary'>
+                Add new course
+            </button>
+        </div>
+    </div>
+    {{/if}}
+    <div class='row'>
+        {{#each courses}} {{> course}} {{/each}} {{#each possibleCourses}} {{> possibleCourse}} {{/each}}
+    </div>
+</template>

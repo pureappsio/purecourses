@@ -1,4 +1,14 @@
-Template.admin.rendered = function() {
+Template.admin.onRendered(function() {
+
+    // $('#user-id').selectpicker();
+    // $('#student-id').selectpicker();
+    // $('#course-id').selectpicker();
+
+    // if (this.data) {
+    //     $('#user-id').selectpicker('refresh');
+    //     $('#student-id').selectpicker('refresh');
+    //     $('#course-id').selectpicker('refresh');
+    // }
 
     // Get all users
     Meteor.call('getAllUsers', function(err, users) {
@@ -14,34 +24,7 @@ Template.admin.rendered = function() {
             }));
         }
     });
-
-    // // Fill picker
-    // Meteor.call('getProducts', function(err, products) {
-
-    //     for (i = 0; i < products.length; i++) {
-    //         $('#products').append($('<option>', {
-    //             value: products[i]._id,
-    //             text: products[i].name
-    //         }));
-    //     }
-
-    //     for (i = 0; i < products.length; i++) {
-    //         $('#accounts-products').append($('<option>', {
-    //             value: products[i]._id,
-    //             text: products[i].name
-    //         }));
-    //     }
-
-    //     for (i = 0; i < products.length; i++) {
-    //         $('#all-products').append($('<option>', {
-    //             value: products[i]._id,
-    //             text: products[i].name
-    //         }));
-    //     }
-
-    // });
-
-}
+});
 
 Template.admin.events({
 
@@ -62,61 +45,21 @@ Template.admin.events({
         Meteor.call('generateApiKey');
 
     },
+    'click #set-role': function() {
 
-    'click #set-theme': function() {
-
-        Meteor.call('insertMeta', { value: $('#theme :selected').val(), type: 'theme' })
-
-    },
-
-    // 'click #reset-edd': function() {
-
-    //   // Reset
-    //   Meteor.call('resetProducts');
-
-    // },
-    'click #set-title': function() {
-
-        // Reset
-        Meteor.call('setTitle', $('#new-title').val());
+        Meteor.call('setUserRole', $('#user-id').val(), $('#user-role :selected').val());
 
     },
-    'click #set-icon': function() {
+    'click #set-course-owner': function() {
 
-        // Reset
-        Meteor.call('insertMeta', { value: $('#new-icon').val(), type: 'icon' });
-
-    },
-    'click #set-user-data': function() {
-
-        // Reset
-        Meteor.call('setUserData', $('#user-name').val(), $('#user-email').val());
+        Meteor.call('setCourseOwner', $('#course-user-id :selected').val(), $('#course-id').val());
 
     },
-    'click #assign-course': function() {
+    'click #assign-teacher': function() {
 
-        // Refresh
-        Meteor.call('assignCourse', $('#users :selected').val(), $('#courses :selected').val());
+        Meteor.call('assignTeacher', $('#app-user-id :selected').val(), $('#student-id').val());
 
-    },
-    // 'click #assign-product-all': function() {
-
-    //     // Assign
-    //     Meteor.call('assignProductAll', $('#all-products').val());
-
-    // },
-    'click #set-language': function() {
-
-        // Refresh
-        Meteor.call('setLanguage', $('#language').val());
-
-    },
-    'click #create-accounts': function() {
-
-        // Refresh
-        Meteor.call('createAccounts', $('#password').val());
     }
-
 });
 
 Template.admin.helpers({
@@ -126,16 +69,16 @@ Template.admin.helpers({
     users: function() {
         return Meteor.users.find({});
     },
-    integrations: function() {
-        return Integrations.find({});
+    appUsers: function() {
+        return Meteor.users.find({ role: { $in: ['admin', 'appuser'] } });
     },
-    userEmail: function() {
-        return Meteor.user().contactEmail;
-    },
-    userName: function() {
-        return Meteor.user().userName;
+    students: function() {
+        return Meteor.users.find({ role: 'student' });
     },
     courses: function() {
         return Courses.find({});
+    },
+    integrations: function() {
+        return Integrations.find({});
     }
 });

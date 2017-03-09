@@ -1,35 +1,33 @@
 <template name="editCourse">
     <h3>Editing Course: {{name}}</h3>
-    <div class='row'>
-        <div class='col-md-2'>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <label>Course name</label>
             <input id='course-name' type='text' class='form-control' value={{name}}>
         </div>
-        <div class='col-md-2'>
-            <input id='course-img-url' type='text' class='form-control' value={{imgUrl}}>
+        <div class='col-md-3'>
+            <label>Upload new course picture:</label>
+            {{> uploadForm fileId="coursePicture"}}
         </div>
-        <div class='col-md-2'>
+        <div class='col-md-3'>
+            <label>Course Sales Page URL:</label>
             <input id='course-sales-page' type='text' class='form-control' value={{salesPage}}>
         </div>
-        <!--  <div class='col-md-3'>
-    <select id='products' multiple>
-    </select>
-  </div> -->
         <div class='col-md-3'>
+            <label>Free/Paid content:</label>
             <select class='form-control' id='access'>
                 <option value='paid'>Paid Content</option>
                 <option value='free'>Free Content</option>
             </select>
         </div>
-        <div class='col-md-2'>
-            <button id='edit-course' class='btn btn-block btn-primary'>Edit Course</button>
+    </div>
+    <div class='row voffset30'>
+        <div class='col-md-3'></div>
+        <div class='col-md-3'>
+            <button id='edit-course' class='btn btn-lg btn-block btn-primary'>Edit Course</button>
         </div>
-        <div class='col-md-2'>
-            <a href='/' class='btn btn-block btn-warning'>Come Back</a>
+        <div class='col-md-3'>
+            <a href='/' class='btn btn-block btn-lg btn-warning'>Come Back</a>
         </div>
     </div>
-   <!--  <div class='row'>
-        <div class='col-md-3'>
-            {{products}}
-        </div>
-    </div> -->
 </template>

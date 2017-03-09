@@ -16,7 +16,13 @@ Meteor.methods({
 
         // Get user
         var user = Meteor.users.findOne(userId);
-        var bonuses = Bonuses.find({ courseId: courseId }, { sort: { order: 1 } }).fetch();
+
+        if (user.role == 'admin' || user.role == 'appuser') {
+            var query = { courseId: courseId, userId: userId };
+        } else {
+            var query = { courseId: courseId, userId: user.teacherId };
+        }
+        var bonuses = Bonuses.find(query, { sort: { order: 1 } }).fetch();
 
         var allowedBonuses = [];
 

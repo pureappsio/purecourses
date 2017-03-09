@@ -1,14 +1,50 @@
 Meteor.methods({
 
-    setLanguage: function(language) {
+    assignTeacher: function(userId, studentId) {
 
-        Meteor.users.update(Meteor.user()._id, { $set: { language: language } });
+        for (i in studentId) {
+            Meteor.users.update(studentId[i], { $set: { teacherId: userId } });
+
+        }
 
     },
-    checkLanguage: function() {
+    setCourseOwner: function(userId, courseId) {
 
-        if (Meteor.users.findOne({ language: { $exists: true } })) {
-            var language = Meteor.users.findOne({ language: { $exists: true } }).language;
+        console.log(courseId);
+        console.log(userId);
+
+        for (i in courseId) {
+
+            Courses.update(courseId[i], { $set: { userId: userId } });
+
+        }
+
+    },
+    setUserRole: function(userId, role) {
+
+        for (i in userId) {
+            Meteor.users.update(userId[i], { $set: { role: role } });
+
+        }
+
+    },
+    getUserDomain: function(domain) {
+
+        if (domain == 'admin') {
+            return Meteor.users.findOne({ role: domain });
+        } else {
+            if (Meteor.users.findOne({ domain: domain })) {
+                return Meteor.users.findOne({ domain: domain });
+            } else {
+                return Meteor.users.findOne({ role: 'admin' });
+            }
+        }
+
+    },
+    checkLanguage: function(userId) {
+
+        if (Metas.findOne({ type: 'language', userId: userId })) {
+            var language = Metas.findOne({ type: 'language', userId: userId }).value;
         } else {
             var language = 'en';
         }
@@ -16,15 +52,10 @@ Meteor.methods({
         return language;
 
     },
-    setTitle: function(title) {
+    getTitle: function(userId) {
 
-        Meteor.users.update(Meteor.user()._id, { $set: { title: title } });
-
-    },
-    getTitle: function(title) {
-
-        if (Meteor.users.findOne({ title: { $exists: true } })) {
-            var title = Meteor.users.findOne({ title: { $exists: true } }).title;
+        if (Metas.findOne({ type: 'title', userId: userId })) {
+            var title = Metas.findOne({ type: 'title', userId: userId }).value;
         } else {
             var title = 'Learn';
         }
