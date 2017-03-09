@@ -53,13 +53,7 @@ Template.home.events({
 
     'click #add-course': function() {
 
-        // Course
-        // course = {
-        //     imgUrl: $('#course-img-url').val(),
-        //     name: $('#course-name').val(),
-        //     access: $('#access :selected').val(),
-        //     userId: Meteor.user()._id
-        // }
+        // Course 
         course = {
             name: $('#course-name').val(),
             access: $('#access :selected').val(),
@@ -70,7 +64,12 @@ Template.home.events({
         }
 
         // Add
-        Meteor.call('addCourse', course);
+        Meteor.call('addCourse', course, function(err, data) {
+
+            $('.confirmation-message').show();
+            $('.confirmation-message').fadeOut(5000);
+
+        });
     }
 
 });

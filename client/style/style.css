@@ -1,5 +1,12 @@
 /* CSS declarations go here */
 
+.confirmation-message {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    display: none;
+}
+
 .row {
     margin-top: 5px;
     vertical-align: middle;

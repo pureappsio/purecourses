@@ -19,12 +19,19 @@ Template.editCourse.events({
             userId: Meteor.user()._id
         }
 
+        if (this.imgId) {
+            course.imgId = this.imgId;
+        }
+
         if (Session.get('coursePicture')) {
             course.imgId = Session.get('coursePicture');
         }
 
         // Add
-        Meteor.call('editCourse', course);
+        Meteor.call('editCourse', course, function() {
+            $('.confirmation-message').show();
+            $('.confirmation-message').fadeOut(2000);
+        });
     }
 
 });
