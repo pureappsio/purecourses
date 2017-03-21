@@ -54,8 +54,15 @@ Template.courseDetails.helpers({
     modules: function() {
         if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
             return Modules.find({ courseId: this._id });
+        } else if (Meteor.user().modules) {
+
+            if (Meteor.user().modules[this._id]) {
+                return Modules.find({ courseId: this._id, _id: { $in: Meteor.user().modules[this._id] } });
+            } else {
+                return Modules.find({ courseId: this._id });
+            }
         } else {
-            return Session.get('allowedModules');
+            return Modules.find({ courseId: this._id });
         }
     },
     lessons: function() {
@@ -64,15 +71,20 @@ Template.courseDetails.helpers({
     bonuses: function() {
         if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
             return Bonuses.find({ courseId: this._id });
+        } else if (Meteor.user().bonuses) {
+
+            if (Meteor.user().bonuses[this._id]) {
+                return Bonuses.find({ courseId: this._id, _id: { $in: Meteor.user().bonuses[this._id] } });
+            } else {
+                return Bonuses.find({ courseId: this._id });
+            }
         } else {
-            return Session.get('allowedBonuses');
+            return Bonuses.find({ courseId: this._id });
         }
     },
     areBonuses: function() {
-        if (Session.get('allowedBonuses')) {
-            if (Session.get('allowedBonuses').length > 0) {
-                return true;
-            }
+        if (Bonuses.findOne({ courseId: this._id })) {
+            return true;
         }
     }
 
@@ -80,18 +92,18 @@ Template.courseDetails.helpers({
 
 Template.courseDetails.onRendered(function() {
 
-    if (this.data) {
+    // if (this.data) {
 
-        // Get right modules
-        console.log('Getting modules');
-        Meteor.call('getAllowedModules', Meteor.user()._id, this.data._id, function(err, modules) {
-            Session.set('allowedModules', modules);
-        });
+    //     // Get right modules
+    //     console.log('Getting modules');
+    //     Meteor.call('getAllowedModules', Meteor.user()._id, this.data._id, function(err, modules) {
+    //         Session.set('allowedModules', modules);
+    //     });
 
-        // Get right bonuses
-        Meteor.call('getAllowedBonuses', Meteor.user()._id, this.data._id, function(err, bonuses) {
-            Session.set('allowedBonuses', bonuses);
-        });
-    }
+    //     // Get right bonuses
+    //     Meteor.call('getAllowedBonuses', Meteor.user()._id, this.data._id, function(err, bonuses) {
+    //         Session.set('allowedBonuses', bonuses);
+    //     });
+    // }
 
 });

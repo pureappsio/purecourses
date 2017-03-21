@@ -2,10 +2,16 @@ Template.home.helpers({
 
     courses: function() {
         if (Meteor.user()) {
+
             if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
                 return Courses.find({ userId: Meteor.user()._id });
             } else {
-                return Session.get('allowedCourses');
+                return Courses.find({
+                    $or: [
+                        { userId: Meteor.user().teacherId, _id: { $in: Meteor.user().courses } },
+                        { userId: Meteor.user().teacherId, access: 'free' },
+                    ]
+                });
             }
         }
 
@@ -15,7 +21,11 @@ Template.home.helpers({
             if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
                 return [];
             } else {
-                return Session.get('possibleCourses');
+                return Courses.find({
+                    userId: Meteor.user().teacherId,
+                    _id: { $nin: Meteor.user().courses },
+                    access: 'paid'
+                });
             }
         }
 
@@ -32,20 +42,20 @@ Template.home.onRendered(function() {
         Session.set('coursesTitle', 'Courses');
     }
 
-    // Get user
-    if (Meteor.user()) {
+    // // Get user
+    // if (Meteor.user()) {
 
-        var user = Meteor.user();
+    //     var user = Meteor.user();
 
-        // Get right courses
-        Meteor.call('getAllowedCourses', user._id, function(err, courses) {
-            Session.set('allowedCourses', courses);
-        });
+    //     // Get right courses
+    //     Meteor.call('getAllowedCourses', user._id, function(err, courses) {
+    //         Session.set('allowedCourses', courses);
+    //     });
 
-        Meteor.call('getPossibleCourses', user._id, function(err, courses) {
-            Session.set('possibleCourses', courses);
-        });
-    }
+    //     Meteor.call('getPossibleCourses', user._id, function(err, courses) {
+    //         Session.set('possibleCourses', courses);
+    //     });
+    // }
 
 });
 

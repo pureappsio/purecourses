@@ -4,6 +4,17 @@ Template.possibleCourse.helpers({
 
         return Session.get('unlockLink_' + this._id);
 
+    },
+    url: function() {
+
+        if (this.imgUrl) {
+            return this.imgUrl;
+        }
+        if (this.imgId) {
+            console.log(Files.findOne(this.imgId));
+            return Files.findOne(this.imgId).link();
+        }
+
     }
 
 });

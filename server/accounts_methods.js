@@ -6,7 +6,7 @@ Meteor.methods({
 
     setUserDomain: function(domain) {
 
-        Meteor.users.update(Meteor.user()._id, {$set: {domain: domain}});
+        Meteor.users.update(Meteor.user()._id, { $set: { domain: domain } });
 
         console.log(Meteor.user());
 
@@ -89,8 +89,8 @@ Meteor.methods({
             });
 
             // Assign role & teacher ID
-            Meteor.users.update(userId, {$set: {role: data.role}});
-            Meteor.users.update(userId, {$set: {teacherId: data.teacherId}});
+            Meteor.users.update(userId, { $set: { role: data.role } });
+            Meteor.users.update(userId, { $set: { teacherId: data.teacherId } });
 
         }
 
@@ -122,7 +122,7 @@ Meteor.methods({
             });
 
             // Assign role
-            Meteor.users.update(userId, {$set: {role: 'appuser'}});
+            Meteor.users.update(userId, { $set: { role: 'appuser' } });
 
         }
 
@@ -164,14 +164,20 @@ Meteor.methods({
             }
 
             // Get admin user
-            var adminUser = Meteor.users.findOne({role: 'admin'});
+            var adminUser = Meteor.users.findOne({ role: 'admin' });
 
             // Create
             var userId = Accounts.createUser({
                 email: data.email,
-                password: password,
-                role: 'student',
-                teacherId: adminUser._id
+                password: password
+            });
+
+            // Update
+            Meteor.users.update(userId, {
+                $set: {
+                    role: 'student',
+                    teacherId: adminUser._id
+                }
             });
 
             // Return password

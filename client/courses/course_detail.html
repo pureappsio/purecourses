@@ -49,16 +49,12 @@
             <button id='add-bonus' class='btn btn-block btn-primary'>Add bonus</button>
         </div>
     </div>
-    {{/if}} 
-    {{#if bonuses}}
-
+    {{/if}} {{#if bonuses}}
     <div class="row voffset30">
-        <div class="col-md-3"><h3>Bonuses</h3> </div>
+        <div class="col-md-3">
+            <h3>Bonuses</h3> </div>
     </div>
-
-    {{/if}} 
-
-    {{#each bonuses}} {{> bonus}} {{/each}}
+    {{/if}} {{#each bonuses}} {{> bonus}} {{/each}}
     <div class="row voffset30">
         <div class="col-md-3"></div>
         <div class="col-md-6">

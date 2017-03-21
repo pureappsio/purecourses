@@ -61,6 +61,8 @@ Template.moduleDetails.helpers({
 Template.moduleDetails.onRendered(function() {
 
     // Init editor
-    CKEDITOR.replace('lesson-text');
+    CKEDITOR.replace('lesson-text', {
+        extraPlugins: 'uploadimage,uploadwidget'
+    });
 
 });
