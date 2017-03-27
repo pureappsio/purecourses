@@ -30,7 +30,12 @@ Template.courseDetails.events({
         }
 
         // Add
-        Meteor.call('addModule', module);
+        Meteor.call('addModule', module, function(err, data) {
+            if (!err) {
+                $('#module-added').show();
+                $('#module-added').fadeOut(2000);
+            }
+        });
     },
     'click #add-bonus': function() {
 
@@ -44,7 +49,12 @@ Template.courseDetails.events({
         };
 
         // Add
-        Meteor.call('addBonus', bonus);
+        Meteor.call('addBonus', bonus, function(err, data) {
+            if (!err) {
+                $('#bonus-added').show();
+                $('#bonus-added').fadeOut(2000);
+            }
+        });
     }
 
 });

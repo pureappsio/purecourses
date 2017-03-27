@@ -1,0 +1,32 @@
+<template name="elementEdit">
+    <div class="row voffset15">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">Editing Element</div>
+    </div>
+    <div class="row voffset15">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {{#if isVideo}} Current file: <a href='{{videoUrl}}'>{{fileName}} </a>
+            <div class='voffset15'>{{> uploadForm fileId="elementFile"}}</div>
+            {{/if}} {{#if isAudio}} Current file: <a href='{{audioUrl}}'>{{fileName}}</a>
+            <div class='voffset15'>{{> uploadForm fileId="elementFile"}}</div>
+            {{/if}} {{#if isPicture}} Current file: <a href='{{imgUrl}}'>{{fileName}}</a>
+            <div class='voffset15'>{{> uploadForm fileId="elementFile"}}</div>
+            {{/if}} {{#if isText}}
+            <input type='text' class='form-control' id="element-text"> {{/if}}
+        </div>
+    </div>
+    {{#if newFile}}
+    <div class="row voffset15">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">New file uploaded: {{newFile}}</div>
+    </div>
+    {{/if}}
+    <div class="row voffset15">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <button id='save-element' class="btn btn-block btn-primary">Save</button>
+        </div>
+        <div class="col-md-4"><a href='/lessons/{{lessonId}}' class="btn btn-block btn-warning">Come Back</a></div>
+    </div>
+</template>

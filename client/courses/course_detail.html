@@ -5,7 +5,7 @@
     </div>
     {{#if isAppUser}} {{#if isTheme 'full'}}
     <div class='row'>
-        <div class='col-md-1'>
+        <div class='col-md-2'>
             <input id='module-order' placeholder="Number..." type='text' class='form-control'>
         </div>
         <div class='col-md-6'>
@@ -13,6 +13,9 @@
         </div>
         <div class='col-md-2'>
             <button id='add-module' class='btn btn-block btn-primary'>Add new module</button>
+        </div>
+        <div class='col-md-2'>
+            <div id='module-added' class='confirmation-message-line'>Module added</div>
         </div>
     </div>
     {{/if}} {{#if isTheme 'simple'}}
@@ -39,14 +42,17 @@
         <div class='col-md-3'>
             <input id='resource-url' type='text' class='form-control' placeholder="URL ...">
         </div>
-        <div class='col-md-3'>
+        <div class='col-md-2'>
             <select id='resource-type' class='form-control'>
                 <option value='Document'>Document</option>
                 <option value='Link'>Link</option>
             </select>
         </div>
-        <div class='col-md-3'>
+        <div class='col-md-2'>
             <button id='add-bonus' class='btn btn-block btn-primary'>Add bonus</button>
+        </div>
+        <div class='col-md-2'>
+            <div id='bonus-added' class='confirmation-message-line'>Bonus added</div>
         </div>
     </div>
     {{/if}} {{#if bonuses}}

@@ -4,6 +4,31 @@ const sendgrid = require('sendgrid')(Meteor.settings.sendGridAPIKey);
 
 Meteor.methods({
 
+    buildApiQuery: function(inputQuery) {
+
+        var query = {};
+
+        if (inputQuery.user) {
+            // Look for user
+            var user = Meteor.users.findOne({ "emails.address": inputQuery.user });
+            if (user) {
+                query.userId = user._id;
+            } else {
+                query.userId = { $exists: false };
+            }
+        }
+
+        if (inputQuery.course) {
+            query.courseId = inputQuery.course;
+        }
+
+        if (inputQuery.module) {
+            query.moduleId = inputQuery.module;
+        }
+
+        return query;
+
+    },
     setUserDomain: function(domain) {
 
         Meteor.users.update(Meteor.user()._id, { $set: { domain: domain } });
@@ -163,8 +188,12 @@ Meteor.methods({
                 }
             }
 
-            // Get admin user
-            var adminUser = Meteor.users.findOne({ role: 'admin' });
+            // Get teacher user
+            if (data.teacherEmail) {
+                var teacherUser = Meteor.users.findOne({ 'emails.address': data.teacherEmail });
+            } else {
+                var teacherUser = Meteor.users.findOne({ role: 'admin' });
+            }
 
             // Create
             var userId = Accounts.createUser({
@@ -176,7 +205,7 @@ Meteor.methods({
             Meteor.users.update(userId, {
                 $set: {
                     role: 'student',
-                    teacherId: adminUser._id
+                    teacherId: teacherUser._id
                 }
             });
 

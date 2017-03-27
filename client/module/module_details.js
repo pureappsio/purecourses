@@ -10,17 +10,14 @@ Template.moduleDetails.events({
             courseId: this.courseId,
             userId: Meteor.user()._id
         };
-
-        if (Session.get('lessonVideo')) {
-            lesson.videoId = Session.get('lessonVideo');
-        }
-
-        if (CKEDITOR.instances['lesson-text'].getData() != '<p><br></p>') {
-            lesson.text = CKEDITOR.instances['lesson-text'].getData();
-        }
-
+        
         // Add
-        Meteor.call('addLesson', lesson);
+        Meteor.call('addLesson', lesson, function(err, data) {
+            if (!err) {
+                $('#lesson-added').show();
+                $('#lesson-added').fadeOut(2000);
+            }
+        });
     },
     'click #add-resource': function() {
 
@@ -35,7 +32,12 @@ Template.moduleDetails.events({
         };
 
         // Add
-        Meteor.call('addResource', resource);
+        Meteor.call('addResource', resource, function(err, data) {
+            if (!err) {
+                $('#resource-added').show();
+                $('#resource-added').fadeOut(2000);
+            }
+        });
     }
 
 });
@@ -60,9 +62,9 @@ Template.moduleDetails.helpers({
 
 Template.moduleDetails.onRendered(function() {
 
-    // Init editor
-    CKEDITOR.replace('lesson-text', {
-        extraPlugins: 'uploadimage,uploadwidget'
-    });
+    // // Init editor
+    // CKEDITOR.replace('lesson-text', {
+    //     extraPlugins: 'uploadimage,uploadwidget'
+    // });
 
 });

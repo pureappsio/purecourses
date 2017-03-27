@@ -11,6 +11,10 @@ Meteor.publish("userLessons", function() {
     return Lessons.find({});
 });
 
+Meteor.publish("userElements", function() {
+    return Elements.find({});
+});
+
 Meteor.publish("userBonuses", function() {
     return Bonuses.find({});
 });

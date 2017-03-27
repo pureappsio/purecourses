@@ -42,21 +42,6 @@ Template.home.onRendered(function() {
         Session.set('coursesTitle', 'Courses');
     }
 
-    // // Get user
-    // if (Meteor.user()) {
-
-    //     var user = Meteor.user();
-
-    //     // Get right courses
-    //     Meteor.call('getAllowedCourses', user._id, function(err, courses) {
-    //         Session.set('allowedCourses', courses);
-    //     });
-
-    //     Meteor.call('getPossibleCourses', user._id, function(err, courses) {
-    //         Session.set('possibleCourses', courses);
-    //     });
-    // }
-
 });
 
 Template.home.events({

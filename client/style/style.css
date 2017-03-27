@@ -1,9 +1,49 @@
 /* CSS declarations go here */
 
+.element-content {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.element-img {
+
+}
+
+.fa-delete {
+    color: gray;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.fa-delete:hover {
+    color: red;
+}
+
+
+.fa-edit {
+    padding-top: 3px;
+    color: gray;
+    cursor: pointer;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.fa-edit:hover {
+    color: blue;
+}
+
 .confirmation-message {
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 10px;
+    display: none;
+}
+
+.confirmation-message-line {
+    font-size: 18px;
     display: none;
 }
 

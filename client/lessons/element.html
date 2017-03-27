@@ -1,0 +1,53 @@
+<template name="element">
+    <div class="row voffset15">
+        <div class="col-md-2"></div>
+        <div class="col-md-1">
+            {{#if isAppUser}}
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="element-minus btn btn-secondary">-</button>
+                <button type="button" class="element-plus btn btn-secondary">+</button>
+            </div>
+            {{/if}}
+        </div>
+        {{#if isAppUser}} {{#if isVideo}}
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <video id='lesson-video-{{_id}}' class='video-js vjs-big-play-centered vjs-16-9' width="100%" preload="auto" controls>
+                <source src="{{videoUrl}}" type="video/mp4">
+            </video>
+        </div>
+        <div class="col-md-1"></div>
+        {{/if}} {{#if isAudio}}
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <audio controls style="width:100%;">
+                <source src="{{audioUrl}}" type="audio/mpeg">
+            </audio>
+        </div>
+        {{/if}} {{#if isPicture}}
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <img src={{imgUrl}} class='element-img img-fluid'> </div>
+        <div class="col-md-1"></div>
+        {{/if}} {{#if isText}}
+        <div class="col-md-6">{{{text}}} </div> {{/if}} {{else}}
+        <div class="col-md-6">
+            {{#if isVideo}}
+            <video id='lesson-video-{{_id}}' class='video-js vjs-big-play-centered vjs-16-9' width="100%" preload="auto" controls>
+                <source src="{{videoUrl}}" type="video/mp4">
+            </video>
+            {{/if}} {{#if isAudio}}
+            <audio controls style="width:100%;">
+                <source src="{{audioUrl}}" type="audio/mpeg">
+            </audio>
+            {{/if}} {{#if isPicture}}
+            <img src={{imgUrl}} class='element-img img-fluid'> {{/if}} {{#if isText}} {{{text}}} {{/if}}
+        </div>
+        {{/if}} {{#if isAppUser}}
+        <div class="col-md-1">
+            <a href='/elements/{{_id}}'><i class="fa fa-pencil fa-edit edit-element" aria-hidden="true"></i></a>
+            <i class="fa fa-trash fa-delete delete-element" aria-hidden="true"></i>
+        </div>
+        {{/if}}
+    </div>
+</template>

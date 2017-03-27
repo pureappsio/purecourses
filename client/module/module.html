@@ -7,7 +7,9 @@
 	
 	{{#if isAppUser}}
 	<div class='col-md-1'><a href='/modules/edit/{{_id}}' class='btn btn-warning btn-block'>Edit</a></div>
-	<div class='col-md-1'><button class='btn btn-danger btn-block delete'>Delete</button></div>
+	<div class='col-md-1'>
+		<i class="fa fa-trash fa-delete delete" aria-hidden="true"></i>
+	</div>
 	{{/if}}
 
 </div>

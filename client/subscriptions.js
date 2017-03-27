@@ -3,6 +3,7 @@ Tracker.autorun(function() {
     Meteor.subscribe('userCourses');
     Meteor.subscribe('userModules');
     Meteor.subscribe('userLessons');
+    Meteor.subscribe('userElements');
     Meteor.subscribe('userResources');
     Meteor.subscribe('userBonuses');
     // Meteor.subscribe('userProducts');

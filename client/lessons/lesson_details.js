@@ -1,4 +1,109 @@
+Template.lessonDetails.events({
+
+    'change #element-type, click #element-type': function() {
+
+        // Get value
+        var selection = $('#element-type :selected').val();
+
+        console.log(selection);
+
+        if (selection == 'text') {
+
+            $('#element-text').show();
+            $('#element-video').hide();
+            $('#element-picture').hide();
+
+            CKEDITOR.replace('lesson-text', {
+                extraPlugins: 'uploadimage,uploadwidget'
+            });
+
+        }
+        if (selection == 'video') {
+
+            $('#element-text').hide();
+            $('#element-video').show();
+            $('#element-picture').hide();
+
+        }
+        if (selection == 'picture') {
+
+            $('#element-text').hide();
+            $('#element-video').hide();
+            $('#element-picture').show();
+
+        }
+
+    },
+    'click #add-element': function() {
+
+        // Get value
+        var selection = $('#element-type :selected').val();
+
+        var element = {
+            lessonId: this._id,
+            userId: Meteor.user()._id
+        };
+
+        if (selection == 'text') {
+
+            if (CKEDITOR.instances['lesson-text'].getData() != '<p><br></p>') {
+                element.text = CKEDITOR.instances['lesson-text'].getData();
+            }
+
+            // Clear
+            CKEDITOR.instances['lesson-text'].setData('');
+
+        }
+        if (selection == 'video') {
+
+            if (Session.get('elementVideo')) {
+                element.videoId = Session.get('elementVideo');
+            }
+
+        }
+        if (selection == 'picture') {
+
+            if (Session.get('elementPicture')) {
+                element.pictureId = Session.get('elementPicture');
+            }
+
+        }
+
+        Meteor.call('addElement', element, function(err, data) {
+            if (!err) {
+                $('#element-added').show();
+                $('#element-added').fadeOut(2000);
+            }
+        });
+
+    }
+
+});
+
 Template.lessonDetails.helpers({
+
+    domain: function() {
+
+        if (Meteor.user().role == 'admin') {
+            return Meteor.absoluteUrl();
+        } else {
+
+            var hostnameArray = document.location.hostname.split(".");
+
+            if (hostnameArray.length == 3) {
+                return Meteor.user().domain + '.' + hostnameArray[1] + '.' + hostnameArray[2];
+
+            } else {
+                return Meteor.user().domain + '.' + hostnameArray[0] + '.' + hostnameArray[1];
+            }
+
+        }
+
+    },
+
+    elements: function() {
+        return Elements.find({ lessonId: this._id }, { sort: { order: 1 } });
+    },
 
     videoUrl: function() {
         if (this.url) {
