@@ -9,6 +9,7 @@ Meteor.methods({
         var query = {};
 
         if (inputQuery.user) {
+            
             // Look for user
             var user = Meteor.users.findOne({ "emails.address": inputQuery.user });
             if (user) {

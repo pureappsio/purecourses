@@ -6,9 +6,17 @@ Template.home.helpers({
             if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
                 return Courses.find({ userId: Meteor.user()._id });
             } else {
+
+                if (Meteor.user().courses) {
+                    courses = Meteor.user().courses;
+                }
+                else {
+                    courses = [];
+                }
+
                 return Courses.find({
                     $or: [
-                        { userId: Meteor.user().teacherId, _id: { $in: Meteor.user().courses } },
+                        { userId: Meteor.user().teacherId, _id: { $in: courses } },
                         { userId: Meteor.user().teacherId, access: 'free' },
                     ]
                 });
@@ -21,9 +29,17 @@ Template.home.helpers({
             if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
                 return [];
             } else {
+
+                if (Meteor.user().courses) {
+                    courses = Meteor.user().courses;
+                }
+                else {
+                    courses = [];
+                }
+
                 return Courses.find({
                     userId: Meteor.user().teacherId,
-                    _id: { $nin: Meteor.user().courses },
+                    _id: { $nin: courses },
                     access: 'paid'
                 });
             }

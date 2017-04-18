@@ -1,0 +1,31 @@
+{
+  "name": "purecourses",
+  "version": "1.0.0",
+  "description": "Online video course management software",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "bcrypt": "^1.0.1",
+    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap-select": "^1.12.2",
+    "jquery-ui": "^1.12.1",
+    "knox": "^0.9.2",
+    "sendgrid": "^5.0.0",
+    "spin": "^0.0.1",
+    "tether": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pureappsio/purecourses.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pureappsio/purecourses/issues"
+  },
+  "homepage": "https://github.com/pureappsio/purecourses#readme"
+}

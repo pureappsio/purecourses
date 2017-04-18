@@ -91,10 +91,10 @@ Template.lessonDetails.helpers({
             var hostnameArray = document.location.hostname.split(".");
 
             if (hostnameArray.length == 3) {
-                return Meteor.user().domain + '.' + hostnameArray[1] + '.' + hostnameArray[2];
+                return Meteor.user().domain + '.' + hostnameArray[1] + '.' + hostnameArray[2] + '/';
 
             } else {
-                return Meteor.user().domain + '.' + hostnameArray[0] + '.' + hostnameArray[1];
+                return Meteor.user().domain + '.' + hostnameArray[0] + '.' + hostnameArray[1] + '/';
             }
 
         }

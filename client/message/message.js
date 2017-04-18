@@ -1,5 +1,15 @@
 Template.message.events({
 
+    'change #course-id, click #course-id': function() {
+
+        var course = $('#course-id :selected').val();
+        var users = Meteor.users.find({ courses: course }).fetch();
+
+        console.log(users);
+
+        Session.set('receivers', users.length)
+
+    },
     'click #send-email': function() {
 
         email = {
@@ -21,6 +31,11 @@ Template.message.events({
 
 Template.message.helpers({
 
+    receivers: function() {
+        if (Session.get('receivers')) {
+            return Session.get('receivers');
+        }
+    },
     courses: function() {
         return Courses.find({});
     }

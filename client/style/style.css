@@ -4,6 +4,14 @@
     display: none;
 }
 
+#spinner {
+    text-align: center;
+    opacity: 1;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+
 button {
     cursor: pointer;
 }

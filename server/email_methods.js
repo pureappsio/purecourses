@@ -6,25 +6,10 @@ Meteor.methods({
 
 	sendEmail: function(emailData) {
 
+        console.log(emailData);
+
         // Find all students
-        var students = [];
-        users = Meteor.users.find({}).fetch();
-        for (i in users) {
-
-            // Get allowed courses
-            var courses = Meteor.call('getAllowedCourses', users[i]._id);
-
-            // Put courses in array
-            var coursesArray = [];
-            for (c in courses) {
-                coursesArray.push(courses[c]._id);
-            }
-
-            if (coursesArray.indexOf(emailData.courseId) != -1) {
-                students.push(users[i].emails[0].address);
-            }
-
-        }
+        var students = Meteor.users.find({ courses: emailData.courseId }).fetch();
 
         console.log('Sending email to ' + students.length + ' students');
 
@@ -37,7 +22,7 @@ Meteor.methods({
 
             personalization = new helper.Personalization();
 
-            emailHelper = new helper.Email(students[r]);
+            emailHelper = new helper.Email(students[r].emails[0].address);
             personalization.addTo(emailHelper);
 
             mail.addPersonalization(personalization);
@@ -46,13 +31,16 @@ Meteor.methods({
 
         // Common
         var user = Meteor.users.findOne(emailData.userId);
-        email = new helper.Email(user.contactEmail, user.userName);
+        var contactEmail = Metas.findOne({type: 'userEmail', userId: emailData.userId}).value;
+        var userName = Metas.findOne({type: 'userName', userId: emailData.userId}).value;
+
+        email = new helper.Email(contactEmail, userName);
         mail.setFrom(email);
         mail.setSubject(emailData.subject);
         content = new helper.Content("text/html", emailData.text);
         mail.addContent(content);
 
-        // console.log(mail);
+        console.log(mail);
 
         // Send
         var requestBody = mail.toJSON()
@@ -63,6 +51,9 @@ Meteor.methods({
         sendgrid.API(request, function(err, response) {
             if (!err) {
                 console.log("Email sent!");
+            }
+            if (err) {
+                console.log(err.response.body);
             }
         });
 

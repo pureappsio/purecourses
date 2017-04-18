@@ -34,14 +34,24 @@ Meteor.methods({
             console.log('Not changing order');
         } else {
 
+            console.log('Changing order');
+
+            if (orderChange == 1) {
+                var pastElement = Elements.findOne({ lessonId: element.lessonId, order: currentOrder + 1 });
+            }
+            if (orderChange == -1) {
+               var pastElement =  Elements.findOne({ lessonId: element.lessonId, order: currentOrder - 1 });
+            }
+
             // Current element
             Elements.update(elementId, { $inc: { order: orderChange } });
 
+            // Past
             if (orderChange == 1) {
-                Elements.update({ lessonId: element.lessonId, order: currentOrder + 1 }, { $inc: { order: -1 } });
+                Elements.update(pastElement._id, { $inc: { order: -1 } });
             }
             if (orderChange == -1) {
-                Elements.update({ lessonId: element.lessonId, order: currentOrder - 1 }, { $inc: { order: 1 } });
+                Elements.update(pastElement._id, { $inc: { order: 1 } });
             }
         }
 

@@ -28,7 +28,7 @@ Meteor.publish("userIntegrations", function() {
 });
 
 Meteor.publish("userMetas", function() {
-    return Metas.find({ userId: this.userId });
+    return Metas.find({});
 });
 
 Meteor.publish("allUsers", function() {

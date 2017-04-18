@@ -21,7 +21,7 @@
     <div class='row'>
         <div class='col-md-8'>
             <div>
-                <button id='send-email' class='btn btn-lg btn-primary btn-block'>Send Email</button>
+                <button id='send-email' class='btn btn-lg btn-primary btn-block'>Send Email {{#if receivers}}to {{receivers}} students{{/if}}</button>
             </div>
             <div id='sent-notification'>
                 Message sent!

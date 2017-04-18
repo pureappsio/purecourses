@@ -11,7 +11,6 @@ Template.possibleCourse.helpers({
             return this.imgUrl;
         }
         if (this.imgId) {
-            console.log(Files.findOne(this.imgId));
             return Files.findOne(this.imgId).link();
         }
 

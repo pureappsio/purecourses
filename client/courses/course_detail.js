@@ -5,7 +5,6 @@ Template.courseDetails.events({
         // Module
         lesson = {
             name: $('#lesson-name').val(),
-            url: $('#lesson-url').val(),
             order: parseFloat($('#lesson-order').val()),
             courseId: this._id,
             userId: Meteor.user()._id
@@ -63,16 +62,16 @@ Template.courseDetails.helpers({
 
     modules: function() {
         if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
-            return Modules.find({ courseId: this._id });
+            return Modules.find({ courseId: this._id }, {sort: {order: 1}});
         } else if (Meteor.user().modules) {
 
             if (Meteor.user().modules[this._id]) {
-                return Modules.find({ courseId: this._id, _id: { $in: Meteor.user().modules[this._id] } });
+                return Modules.find({ courseId: this._id, _id: { $in: Meteor.user().modules[this._id] } }, {sort: {order: 1}});
             } else {
-                return Modules.find({ courseId: this._id });
+                return Modules.find({ courseId: this._id }, {sort: {order: 1}});
             }
         } else {
-            return Modules.find({ courseId: this._id });
+            return Modules.find({ courseId: this._id }, {sort: {order: 1}});
         }
     },
     lessons: function() {

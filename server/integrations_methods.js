@@ -13,7 +13,7 @@ Meteor.methods({
         for (p in products) {
 
             if (products[p].courses == courseId) {
-                url = 'https://' + integration.url + '?product_id=' + products[p]._id;
+                url = 'https://' + integration.url + '/checkout?product_id=' + products[p]._id;
             }
 
         }
@@ -21,7 +21,7 @@ Meteor.methods({
         return url;
 
     },
-	getProductSales: function(productId) {
+    getProductSales: function(productId) {
 
         // Get integration
         var integration = Integrations.find({}).fetch()[0];
@@ -39,7 +39,7 @@ Meteor.methods({
 
     },
 
-	getProducts: function() {
+    getProducts: function() {
 
         // Get integration
         var integration = Integrations.find({}).fetch()[0];
@@ -47,7 +47,7 @@ Meteor.methods({
         if (integration) {
             // Make request
             var baseUrl = "http://" + integration.url + "/api/products?key=" + integration.key;
-            baseUrl += '&type=api' 
+            baseUrl += '&type=api'
             try {
                 var answer = HTTP.get(baseUrl).data.products;
             } catch (err) {
@@ -61,7 +61,7 @@ Meteor.methods({
 
     },
 
-	addIntegration: function(data) {
+    addIntegration: function(data) {
 
         // Insert
         Integrations.insert(data);
