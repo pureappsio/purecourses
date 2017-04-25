@@ -9,7 +9,7 @@ Meteor.methods({
         var query = {};
 
         if (inputQuery.user) {
-            
+
             // Look for user
             var user = Meteor.users.findOne({ "emails.address": inputQuery.user });
             if (user) {
@@ -101,12 +101,12 @@ Meteor.methods({
         // Check if exist
         if (Meteor.users.findOne({ "emails.0.address": data.email })) {
 
-            console.log('Updating existing student');
+            console.log('Updating existing user');
             var userId = Meteor.users.findOne({ "emails.0.address": data.email })._id;
 
         } else {
 
-            console.log('Creating new student');
+            console.log('Creating new user');
 
             // Create
             var userId = Accounts.createUser({
@@ -116,7 +116,9 @@ Meteor.methods({
 
             // Assign role & teacher ID
             Meteor.users.update(userId, { $set: { role: data.role } });
-            Meteor.users.update(userId, { $set: { teacherId: data.teacherId } });
+            if (data.teacherId) {
+                Meteor.users.update(userId, { $set: { teacherId: data.teacherId } });
+            }
 
         }
 

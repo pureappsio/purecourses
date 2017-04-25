@@ -12,6 +12,10 @@
     top: 50%;
 }
 
+.course-container {
+    margin-bottom: 15px;
+}
+
 button {
     cursor: pointer;
 }

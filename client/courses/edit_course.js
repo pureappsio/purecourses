@@ -7,6 +7,14 @@ Template.editCourse.rendered = function() {
 
 Template.editCourse.events({
 
+    'click .delete': function() {
+
+        // Add
+        Meteor.call('deleteCourse', this._id, function(err, data) {
+            Router.go('/');
+        });
+    },
+
     'click #edit-course': function() {
 
         // Course

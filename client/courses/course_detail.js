@@ -62,16 +62,16 @@ Template.courseDetails.helpers({
 
     modules: function() {
         if (Meteor.user().role == 'admin' || Meteor.user().role == 'appuser') {
-            return Modules.find({ courseId: this._id }, {sort: {order: 1}});
+            return Modules.find({ courseId: this._id }, { sort: { order: 1 } });
         } else if (Meteor.user().modules) {
 
             if (Meteor.user().modules[this._id]) {
-                return Modules.find({ courseId: this._id, _id: { $in: Meteor.user().modules[this._id] } }, {sort: {order: 1}});
+                return Modules.find({ courseId: this._id, _id: { $in: Meteor.user().modules[this._id] } }, { sort: { order: 1 } });
             } else {
-                return Modules.find({ courseId: this._id }, {sort: {order: 1}});
+                return Modules.find({ courseId: this._id }, { sort: { order: 1 } });
             }
         } else {
-            return Modules.find({ courseId: this._id }, {sort: {order: 1}});
+            return Modules.find({ courseId: this._id }, { sort: { order: 1 } });
         }
     },
     lessons: function() {
