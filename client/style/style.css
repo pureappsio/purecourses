@@ -4,6 +4,10 @@
     display: none;
 }
 
+.btn {
+    cursor: pointer;
+}
+
 #spinner {
     text-align: center;
     opacity: 1;

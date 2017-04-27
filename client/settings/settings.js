@@ -60,6 +60,26 @@ Template.settings.events({
         });
 
     },
+    'click #set-courses-line': function() {
+
+        // Insert
+        Meteor.call('insertMeta', {
+            value: $('#courses-line :selected').val(),
+            type: 'coursesLine',
+            userId: Meteor.user()._id
+        });
+
+    },
+    'click #set-unlock': function() {
+
+        // Insert
+        Meteor.call('insertMeta', {
+            value: $('#unlock :selected').val(),
+            type: 'unlockLink',
+            userId: Meteor.user()._id
+        });
+
+    },
     'click #assign-course': function() {
 
         // Refresh

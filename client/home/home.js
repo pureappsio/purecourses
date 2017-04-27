@@ -58,6 +58,13 @@ Template.home.onRendered(function() {
         Session.set('coursesTitle', 'Courses');
     }
 
+    // Get all products
+    Meteor.call('getProductsJson', function(err, data) {
+
+        Session.set('coursesProducts', data);
+
+    });
+
 });
 
 Template.home.events({

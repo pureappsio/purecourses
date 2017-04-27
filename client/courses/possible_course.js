@@ -2,7 +2,13 @@ Template.possibleCourse.helpers({
 
     unlockLink: function() {
 
-        return Session.get('unlockLink_' + this._id);
+        if (this.salesPage) {
+            return this.salesPage;
+        } else {
+            if (Session.get('coursesProducts')) {
+                return Session.get('coursesProducts')[this._id];
+            }
+        }
 
     },
     url: function() {
@@ -19,18 +25,5 @@ Template.possibleCourse.helpers({
 });
 
 Template.possibleCourse.onRendered(function() {
-
-    if (this.data) {
-
-    	courseId = this.data._id;
-
-        if (this.data.salesPage) {
-            Session.set('unlockLink_' + courseId, this.data.salesPage);
-        } else {
-            Meteor.call('getProductLink', courseId, function(err, data) {
-            	Session.set('unlockLink_' + courseId, data);
-            });
-        }
-    }
 
 });

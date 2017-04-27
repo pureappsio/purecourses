@@ -1,26 +1,26 @@
 Meteor.methods({
 
-    getProductLink(courseId) {
+    // getProductLink(courseId) {
 
-        var url = "";
+    //     var url = "";
 
-        // Get integration
-        var integration = Integrations.find({}).fetch()[0];
+    //     // Get integration
+    //     var integration = Integrations.find({}).fetch()[0];
 
-        var products = Meteor.call('getProducts');
-        console.log(products);
+    //     var products = Meteor.call('getProducts');
+    //     console.log(products);
 
-        for (p in products) {
+    //     for (p in products) {
 
-            if (products[p].courses == courseId) {
-                url = 'https://' + integration.url + '/checkout?product_id=' + products[p]._id;
-            }
+    //         if (products[p].courses == courseId) {
+    //             url = 'https://' + integration.url + '/checkout?product_id=' + products[p]._id;
+    //         }
 
-        }
+    //     }
 
-        return url;
+    //     return url;
 
-    },
+    // },
     getProductSales: function(productId) {
 
         // Get integration
@@ -61,6 +61,44 @@ Meteor.methods({
 
     },
 
+    getProductsJson: function() {
+
+        // Products
+        var products = Meteor.call('getProducts');
+
+        // Get integration
+        var integration = Integrations.find({}).fetch()[0];
+
+        productsJson = {};
+
+        // Get type
+        if (Meteor.user().teacherId) {
+            userId = Meteor.user().teacherId;
+        } else {
+            userId = Meteor.user()._id;
+        }
+
+        if (Metas.findOne({ type: 'unlockLink', userId: userId })) {
+            var linkType = Metas.findOne({ type: 'unlockLink', userId: userId }).value;
+        } else {
+            var linkType = 'checkout';
+        }
+
+        console.log(linkType);
+
+        for (i in products) {
+
+            if (linkType == 'checkout') {
+                url = 'https://' + integration.url + '/checkout?product_id=' + products[i]._id;
+            } else {
+                url = 'https://' + integration.url + '/products/' + products[i].shortName;
+            }
+            productsJson[products[i].courses] = url;
+        }
+
+        return productsJson;
+
+    },
     addIntegration: function(data) {
 
         // Insert
