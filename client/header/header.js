@@ -10,6 +10,28 @@ Template.header.helpers({
 
     title: function() {
         return Session.get('title');
+    },
+    notUser: function() {
+        if (!Meteor.user()) {
+            return true;
+        }
+    },
+    langEN: function() {
+
+        if (Metas.findOne({ type: 'language', userId: Session.get('teacherId') })) {
+
+            var language = Metas.findOne({ type: 'language', userId: Session.get('teacherId') }).value;
+
+            if (language == 'fr') {
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+
     }
 
 });

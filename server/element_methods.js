@@ -1,3 +1,5 @@
+import Files from '../imports/api/files';
+
 Meteor.methods({
 
     editElement: function(element) {

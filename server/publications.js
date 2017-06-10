@@ -1,3 +1,5 @@
+import Files from '../imports/api/files';
+
 Meteor.publish("userCourses", function() {
 
     return Courses.find({});

@@ -14,7 +14,7 @@ Template.lessonDetails.events({
             $('#element-picture').hide();
 
             CKEDITOR.replace('lesson-text', {
-                extraPlugins: 'uploadimage,uploadwidget'
+                extraPlugins: 'justify'
             });
 
         }

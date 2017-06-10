@@ -11,6 +11,11 @@ Template.settings.events({
 
     },
 
+    'click #reset-student-password' : function()  {
+
+        Meteor.call('resetStudentPassword', $('#student-password-id :selected').val(), $('#student-password-reset').val());
+
+    },
     'click #create-student-account': function() {
 
         var account = {
@@ -39,6 +44,26 @@ Template.settings.events({
         Meteor.call('insertMeta', {
             value: $('#new-icon').val(),
             type: 'icon',
+            userId: Meteor.user()._id
+        });
+
+    },
+    'click #set-message': function() {
+
+        // Reset
+        Meteor.call('insertMeta', {
+            value: $('#front-message').val(),
+            type: 'frontMessage',
+            userId: Meteor.user()._id
+        });
+
+    },
+    'click #set-front-picture': function() {
+
+        // Reset
+        Meteor.call('insertMeta', {
+            value: Session.get('frontPicture'),
+            type: 'frontPicture',
             userId: Meteor.user()._id
         });
 
@@ -100,6 +125,10 @@ Template.settings.events({
 });
 
 Template.settings.helpers({
+
+     key: function() {
+        return Meteor.user().apiKey;
+    },
 
     domain: function() {
 

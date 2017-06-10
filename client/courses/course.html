@@ -1,12 +1,13 @@
 <template name="course">
     <div class='col-md-{{courseContainerSize}} course-container'>
-        <a href='/courses/{{_id}}'><img class='img-fluid' src='{{url}}'></a>
-        <div class='voffset30 col-centered'>
-            <a class='btn btn-primary btn-lg' href='/courses/{{_id}}'>
-        {{#if isTheme 'full'}}Go to the Course{{/if}}
-        {{#if isTheme 'simple'}}{{name}}{{/if}}
-      </a>
-        </div>
+        <a class='course-link' href='/courses/{{_id}}'>
+            <div class='course-inside'>
+                <img class='course-picture img-fluid' src='{{url}}'>
+                <div class='visitor-course-title col-centered'>
+                    {{name}}
+                </div>
+            </div>
+        </a>
         {{#if isAppUser}}
         <div class='row voffset15'>
             <div class='col-md-3'></div>

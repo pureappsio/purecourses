@@ -1,10 +1,14 @@
 <template name="possibleCourse">
-    <div class='col-md-4 course-container'>
-        <a href='{{unlockLink}}'>
-            <div class='possible-course-picture-container'><img class='possible-course-picture img-fluid' src='{{url}}'></div>
+    <div class='col-md-{{courseContainerSize}} course-container'>
+        <a class='course-link' href='{{unlockLink}}'>
+            <div class='course-inside'>
+                <div class='possible-course-picture-container'><img class='course-picture possible-course-picture img-fluid' src='{{url}}'></div>
+                <div class='voffset30 col-centered'>
+                    <div class='visitor-course-title col-centered'>
+                        {{name}}
+                    </div>
+                </div>
+            </div>
         </a>
-        <div class='voffset30 col-centered'>
-            <a class='btn btn-warning btn-lg' href='{{unlockLink}}'>Unlock Content</a>
-        </div>
     </div>
 </template>

@@ -117,7 +117,9 @@ Template.elementEdit.onRendered(function() {
 
     if (this.data) {
         if (this.data.text) {
-            CKEDITOR.replace('element-text');
+            CKEDITOR.replace('element-text', {
+                extraPlugins: 'justify,image2'
+            });
             CKEDITOR.instances['element-text'].setData(this.data.text);
         }
 

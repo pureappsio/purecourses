@@ -4,8 +4,76 @@
     display: none;
 }
 
+.feat-courses-title {
+    margin-top: 35px;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.visitor-course-title {
+    margin-top: 30px !important;
+}
+
+.visitor-course-container {
+    padding-right: 45px;
+    padding-left: 45px;
+}
+
+.visitor-course {
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.08);
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    padding-bottom: 25px;
+    border: 1px solid lightgray;
+}
+
+.visitor-picture {
+    border-radius: 15px 15px 0px 0px;
+}
+
+.course-picture {
+    border-radius: 15px 15px 0px 0px;
+}
+
+.course-link {
+    text-decoration: none !important;
+    color: black !important
+}
+
+.course-inside {
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.08);
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    background-color: #f7f7f7;
+    padding-bottom: 25px;
+    cursor: pointer;
+}
+
+.visitor-row {
+    min-height: 450px;
+    background-color: black;
+    color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 130px;
+    padding-bottom: 100px;
+    font-size: 46px;
+    font-weight: bold;
+}
+
 .btn {
     cursor: pointer;
+}
+
+.form-nav {
+    margin-right: 15px;
+}
+
+.btn-nav {
+    font-size: 22px !important;
 }
 
 #spinner {
@@ -24,9 +92,7 @@ button {
     cursor: pointer;
 }
 
-.element-img {
-
-}
+.element-img {}
 
 .fa-delete {
     color: gray;
@@ -37,7 +103,6 @@ button {
 .fa-delete:hover {
     color: red;
 }
-
 
 .fa-edit {
     padding-top: 3px;
@@ -82,7 +147,7 @@ label {
 
 .site-title {
     color: black;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .column-sort {

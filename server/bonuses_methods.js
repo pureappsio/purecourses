@@ -1,4 +1,13 @@
+import Files from '../imports/api/files';
+
 Meteor.methods({
+
+    resetStudentPassword(userId, password) {
+
+        // Set new password
+        Accounts.setPassword(userId, password);
+
+    },
     addBonus: function(data) {
 
         // Insert

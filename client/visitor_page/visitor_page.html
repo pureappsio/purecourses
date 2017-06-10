@@ -1,0 +1,20 @@
+<template name="visitorPage">
+    {{#if isTitle}}
+    <div class='row visitor-row' style='background-image: url({{image}})'>
+        <div class='col-md-2'></div>
+        <div class='col-md-8 col-centered'>
+            {{title}}
+        </div>
+    </div>
+    {{/if}}
+    <div class='row'>
+        <div class='col-md-2'></div>
+        <div class='col-md-8 col-centered'>
+            <div class='feat-courses-title'>{{featName}}</div>
+        </div>
+    </div>
+    <div class='row'>
+        {{#each courses}} {{> visitorCourse}} {{/each}}
+    </div>
+    <div class='voffset50'></div>
+</template>

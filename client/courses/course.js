@@ -1,8 +1,12 @@
-Template.course.events({
+// Template.course.events({
 
+//     'click .course-inside': function() {
 
+//         Router.go('courses/' + this._id);
 
-});
+//     }
+
+// });
 
 Template.course.helpers({
 
