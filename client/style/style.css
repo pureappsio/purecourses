@@ -1,5 +1,9 @@
 /* CSS declarations go here */
 
+.vbottom30 {
+    margin-bottom: 30px !important;
+}
+
 .element-content {
     display: none;
 }

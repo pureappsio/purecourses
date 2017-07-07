@@ -1,17 +1,17 @@
 <template name="module">
-
-<div class='row'>
-
-	<div class='col-md-1'>{{order}}</div>
-	<div class='col-md-9'><a href='/modules/{{_id}}'>{{name}}</a></div>
-	
-	{{#if isAppUser}}
-	<div class='col-md-1'><a href='/modules/edit/{{_id}}' class='btn btn-warning btn-block'>Edit</a></div>
-	<div class='col-md-1'>
-		<i class="fa fa-trash fa-delete delete" aria-hidden="true"></i>
-	</div>
-	{{/if}}
-
-</div>
-
+    <div class='row'>
+        <div class='col-md-1'>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="module-up btn btn-secondary"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></button>
+                <button type="button" class="module-down btn btn-secondary"><i class="fa fa-long-arrow-down" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class='col-md-9'><a href='/modules/{{_id}}'>{{name}}</a></div>
+        {{#if isAppUser}}
+        <div class='col-md-1'><a href='/modules/edit/{{_id}}' class='btn btn-warning btn-block'>Edit</a></div>
+        <div class='col-md-1'>
+            <i class="fa fa-trash fa-delete delete" aria-hidden="true"></i>
+        </div>
+        {{/if}}
+    </div>
 </template>

@@ -11,7 +11,7 @@
             <label for='course-name'>Course Name</label>
             <input id='course-name' type='text' class='form-control' placeholder="Name ...">
         </div>
-        <div class='col-md-3'>
+        <div class='col-md-2'>
             <label for='upload-form'>Course Display Picture</label>
             {{> uploadForm fileId="coursePicture"}}
         </div>
@@ -20,6 +20,13 @@
             <select class='form-control' id='access'>
                 <option value='paid'>Paid Content</option>
                 <option value='free'>Free Content</option>
+            </select>
+        </div>
+        <div class='col-md-1'>
+            <label for='status'>Status</label>
+            <select class='form-control' id='status'>
+                <option value='published'>Published</option>
+                <option value='draft'>Draft</option>
             </select>
         </div>
     </div>

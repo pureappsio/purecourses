@@ -7,11 +7,11 @@
     {{#if isAppUser}}
     <div class='row'>
         <div class='col-md-2'></div>
-        <div class='col-md-2'>
+        <!--    <div class='col-md-2'>
             <label for='lesson-order'>Number</label>
             <input id='lesson-order' type='text' class='form-control' placeholder="Number...">
-        </div>
-        <div class='col-md-6'>
+        </div> -->
+        <div class='col-md-8'>
             <label for='lesson-name'>Lesson Name</label>
             <input id='lesson-name' type='text' class='form-control' placeholder="Name ...">
         </div>
@@ -41,7 +41,11 @@
         </div>
     </div>
     {{/if}} {{#each lessons}} {{> lesson}} {{/each}} {{#if isAppUser}}
-    <h3>Add Resource</h3>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Add Resource</h3>
+        </div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
             <input id='resource-name' type='text' class='form-control' placeholder="Name ...">

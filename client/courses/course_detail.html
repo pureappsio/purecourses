@@ -4,10 +4,10 @@
             <h3>{{name}}</h3> </div>
     </div>
     {{#if isAppUser}} {{#if isTheme 'full'}}
-    <div class='row'>
-        <div class='col-md-2'>
+    <div class='row vbottom30'>
+        <!--  <div class='col-md-2'>
             <input id='module-order' placeholder="Number..." type='text' class='form-control'>
-        </div>
+        </div> -->
         <div class='col-md-6'>
             <input id='module-name' placeholder="Module name..." type='text' class='form-control'>
         </div>
@@ -19,11 +19,11 @@
         </div>
     </div>
     {{/if}} {{#if isTheme 'simple'}}
-    <div class='row'>
-        <div class='col-md-1'>
+    <div class='row vbottom30'>
+        <!--  <div class='col-md-1'>
             <input id='lesson-order' type='text' class='form-control'>
-        </div>
-        <div class='col-md-3'>
+        </div> -->
+        <div class='col-md-4'>
             <input id='lesson-name' type='text' class='form-control' placeholder="Name ...">
         </div>
         <div class='col-md-3'>
@@ -31,7 +31,10 @@
         </div>
     </div>
     {{/if}} {{/if}} {{#if isTheme 'full'}} {{#each modules}} {{> module}} {{/each}} {{/if}} {{#if isTheme 'simple'}} {{#each lessons}} {{> lesson}} {{/each}} {{/if}} {{#if isAppUser}}
-    <h3>Add Bonus</h3>
+    <div class='row voffset30'>
+        <div class='col-md-3'>
+            <h3>Add Bonus</h3></div>
+    </div>
     <div class='row'>
         <div class='col-md-3'>
             <input id='resource-name' type='text' class='form-control' placeholder="Name ...">

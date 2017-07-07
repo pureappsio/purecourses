@@ -9,14 +9,13 @@ Template.home.helpers({
 
                 if (Meteor.user().courses) {
                     courses = Meteor.user().courses;
-                }
-                else {
+                } else {
                     courses = [];
                 }
 
                 return Courses.find({
                     $or: [
-                        { userId: Meteor.user().teacherId, _id: { $in: courses } },
+                        { userId: Meteor.user().teacherId, status: { $ne: 'draft' }, _id: { $in: courses } },
                         { userId: Meteor.user().teacherId, access: 'free' },
                     ]
                 });
@@ -32,12 +31,12 @@ Template.home.helpers({
 
                 if (Meteor.user().courses) {
                     courses = Meteor.user().courses;
-                }
-                else {
+                } else {
                     courses = [];
                 }
 
                 return Courses.find({
+                    status: { $ne: 'draft' },
                     userId: Meteor.user().teacherId,
                     _id: { $nin: courses },
                     access: 'paid'
@@ -75,7 +74,8 @@ Template.home.events({
         course = {
             name: $('#course-name').val(),
             access: $('#access :selected').val(),
-            userId: Meteor.user()._id
+            userId: Meteor.user()._id,
+            status: $('#status :selected').val()
         }
         if (Session.get('coursePicture')) {
             course.imgId = Session.get('coursePicture');

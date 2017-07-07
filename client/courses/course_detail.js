@@ -5,7 +5,6 @@ Template.courseDetails.events({
         // Module
         lesson = {
             name: $('#lesson-name').val(),
-            order: parseFloat($('#lesson-order').val()),
             courseId: this._id,
             userId: Meteor.user()._id
         };
@@ -19,7 +18,6 @@ Template.courseDetails.events({
         // Module
         module = {
             name: $('#module-name').val(),
-            order: parseFloat($('#module-order').val()),
             courseId: this._id,
             userId: Meteor.user()._id
         }

@@ -2,6 +2,42 @@ import Files from '../imports/api/files';
 
 Meteor.methods({
 
+    changeModuleOrder: function(moduleId, orderChange) {
+
+        // Get module
+        var module = Modules.findOne(moduleId);
+        var currentOrder = module.order;
+        var modules = Modules.find({ courseId: module.courseId }).fetch();
+
+        if (modules.length == currentOrder && orderChange == 1) {
+            console.log('Not changing order');
+        } else if (currentOrder == 0 && orderChange == -1) {
+            console.log('Not changing order');
+        } else {
+
+            console.log('Changing order');
+
+            if (orderChange == 1) {
+                var pastElement = Modules.findOne({ courseId: module.courseId, order: currentOrder + 1 });
+            }
+            if (orderChange == -1) {
+                var pastElement = Modules.findOne({ courseId: module.courseId, order: currentOrder - 1 });
+            }
+
+            // Current element
+            Modules.update(moduleId, { $inc: { order: orderChange } });
+
+            // Past
+            if (orderChange == 1) {
+                Modules.update(pastElement._id, { $inc: { order: -1 } });
+            }
+            if (orderChange == -1) {
+                Modules.update(pastElement._id, { $inc: { order: 1 } });
+            }
+        }
+
+    },
+
     getAllowedModules: function(userId, courseId) {
 
         // Get user
@@ -46,6 +82,10 @@ Meteor.methods({
 
     addModule: function(module) {
 
+        // Order
+        var order = Modules.find({ courseId: module.courseId }).fetch().length + 1;
+        module.order = order;
+
         // Add
         Modules.insert(module);
 
@@ -53,26 +93,6 @@ Meteor.methods({
     editModule: function(moduleData) {
 
         console.log(moduleData);
-
-        // Get current products
-        // var module = Modules.findOne(moduleData._id);
-
-        // if (moduleData.products) {
-
-        //     if (module.products) {
-        //         var products = module.products;
-
-        //         // Update products
-        //         for (i = 0; i < moduleData.products.length; i++) {
-        //             if (products.indexOf(moduleData.products[i]) == -1) {
-        //                 products.push(moduleData.products[i]);
-        //             }
-        //         }
-
-        //         moduleData.products = products;
-        //     }
-
-        // }
 
         // Update module
         Modules.update(moduleData._id, moduleData);

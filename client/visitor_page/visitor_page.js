@@ -8,7 +8,10 @@ Template.visitorPage.helpers({
         return Files.findOne(picId).link();
     },
     courses: function() {
-        return Courses.find({ userId: Session.get('teacherId') }, { limit: 6 });
+        return Courses.find({
+            userId: Session.get('teacherId'),
+            status: { $ne: 'draft' }
+        }, { limit: 6 });
     },
     isTitle: function() {
         if (Metas.findOne({ type: 'frontMessage', userId: Session.get('teacherId') })) {

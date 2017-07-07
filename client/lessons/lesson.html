@@ -1,6 +1,11 @@
 <template name="lesson">
     <div class='row'>
-        <div class='col-md-1'>{{order}}</div>
+        <div class='col-md-1'>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="lesson-up btn btn-secondary"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></button>
+                <button type="button" class="lesson-down btn btn-secondary"><i class="fa fa-long-arrow-down" aria-hidden="true"></i></button>
+            </div>
+        </div>
         <div class='col-md-9'><a href='/lessons/{{_id}}'>{{name}}</a></div>
         {{#if isAppUser}}
         <div class='col-md-2'>

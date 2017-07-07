@@ -1,14 +1,33 @@
-// Template.course.events({
+Template.course.events({
 
-//     'click .course-inside': function() {
+    'click .publish': function() {
 
-//         Router.go('courses/' + this._id);
+        Meteor.call('changeCourseStatus', this._id, 'published');
 
-//     }
+    },
+    'click .unpublish': function() {
 
-// });
+        Meteor.call('changeCourseStatus', this._id, 'draft');
+
+    }
+
+});
 
 Template.course.helpers({
+
+    published: function() {
+        if (this.status) {
+
+            if (this.status == 'draft') {
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+    },
 
     courseContainerSize: function() {
 
