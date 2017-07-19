@@ -1,5 +1,10 @@
 /* CSS declarations go here */
 
+.course-pricing {
+    margin-right: 25px;
+    color: darkblue;
+}
+
 .vbottom30 {
     margin-bottom: 30px !important;
 }

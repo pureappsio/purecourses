@@ -22,7 +22,7 @@ Template.possibleCourse.helpers({
             return this.salesPage;
         } else {
             if (Session.get('coursesProducts')) {
-                return Session.get('coursesProducts')[this._id];
+                return Session.get('coursesProducts')[this._id].url;
             }
         }
 

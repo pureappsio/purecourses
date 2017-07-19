@@ -2,27 +2,11 @@ import Files from '../imports/api/files';
 
 Meteor.methods({
 
-    // getProductLink(courseId) {
+    getCoursePrice: function(courseId) {
 
-    //     var url = "";
 
-    //     // Get integration
-    //     var integration = Integrations.find({}).fetch()[0];
 
-    //     var products = Meteor.call('getProducts');
-    //     console.log(products);
-
-    //     for (p in products) {
-
-    //         if (products[p].courses == courseId) {
-    //             url = 'https://' + integration.url + '/checkout?product_id=' + products[p]._id;
-    //         }
-
-    //     }
-
-    //     return url;
-
-    // },
+    },
     getProductSales: function(productId) {
 
         // Get integration
@@ -63,30 +47,21 @@ Meteor.methods({
 
     },
 
-    getProductsJson: function() {
+    getProductsJson: function(userId) {
 
         // Products
         var products = Meteor.call('getProducts');
-
+        
         // Get integration
         var integration = Integrations.find({}).fetch()[0];
 
         productsJson = {};
-
-        // Get type
-        if (Meteor.user().teacherId) {
-            userId = Meteor.user().teacherId;
-        } else {
-            userId = Meteor.user()._id;
-        }
 
         if (Metas.findOne({ type: 'unlockLink', userId: userId })) {
             var linkType = Metas.findOne({ type: 'unlockLink', userId: userId }).value;
         } else {
             var linkType = 'checkout';
         }
-
-        console.log(linkType);
 
         for (i in products) {
 
@@ -95,7 +70,7 @@ Meteor.methods({
             } else {
                 url = 'https://' + integration.url + '/products/' + products[i].shortName;
             }
-            productsJson[products[i].courses] = url;
+            productsJson[products[i].courses] = { url: url, price: products[i].price.USD };
         }
 
         return productsJson;

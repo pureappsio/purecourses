@@ -2,6 +2,19 @@ import Files from '../imports/api/files';
 
 Meteor.methods({
 
+    getFileLink: function(fileId) {
+
+        // Path
+        var fileRef = Files.findOne(fileId);
+        path = fileRef.versions[version].meta.pipePath;
+
+        // Build S3 path
+        s3Conf = Meteor.settings.s3;
+        var s3_path = 'https://s3-' + s3Conf.region + '.amazonaws.com/' + s3Conf.bucket + '/' + path;
+
+        return s3_path;
+
+    },
     editElement: function(element) {
 
         Elements.update(element._id, { $set: element });
@@ -42,7 +55,7 @@ Meteor.methods({
                 var pastElement = Elements.findOne({ lessonId: element.lessonId, order: currentOrder + 1 });
             }
             if (orderChange == -1) {
-               var pastElement =  Elements.findOne({ lessonId: element.lessonId, order: currentOrder - 1 });
+                var pastElement = Elements.findOne({ lessonId: element.lessonId, order: currentOrder - 1 });
             }
 
             // Current element

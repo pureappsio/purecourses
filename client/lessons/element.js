@@ -25,7 +25,7 @@ Template.element.helpers({
             return this.url;
         }
         if (this.videoId) {
-            return Files.findOne(this.videoId).link();
+            return Session.get('videoLink' + this._id);
         }
     },
     imgUrl: function() {
@@ -80,6 +80,17 @@ Template.element.helpers({
 Template.element.onRendered(function() {
 
     if (this.data) {
+
+        if (this.data.videoId) {
+
+            var videoId = this.data.videoId;
+
+            Meteor.call('getFileLink', videoId, function(err, data) {
+
+                Session.set('videoLink' + videoId, data);
+
+            });
+        }
 
         if (videojs.getPlayers()['lesson-video-' + this.data._id]) {
             delete videojs.getPlayers()['lesson-video-' + this.data._id];

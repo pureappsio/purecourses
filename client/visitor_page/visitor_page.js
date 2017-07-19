@@ -1,3 +1,14 @@
+Template.visitorPage.onRendered(function() {
+
+    // Get all products
+    Meteor.call('getProductsJson', Session.get('teacherId'), function(err, data) {
+
+        Session.set('coursesProducts', data);
+
+    });
+
+});
+
 Template.visitorPage.helpers({
 
     title: function() {
